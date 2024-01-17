@@ -4,7 +4,7 @@ import { ProfileAdmin } from "../ProfileAdmin"
 export const SideBar = () => {
     return (
         <>
-            <header className="flex justify-between items-center p-4 text-sm text-gray-500 md:justify-center md:ml-60 border-b border-grey-400">
+            <header className="flex justify-between items-center p-7 text-sm text-gray-500 md:justify-center md:ml-60 border-b border-grey-400">
                 <button
                     data-drawer-target="logo-sidebar"
                     data-drawer-toggle="logo-sidebar"
