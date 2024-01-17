@@ -1,11 +1,38 @@
+import { useEffect, useRef, useState } from "react";
 import { MenuAdmin } from "../MenuAdmin"
 import { ProfileAdmin } from "../ProfileAdmin"
 
 export const SideBar = () => {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const sidebarRef = useRef(null);
+
+    const handleSidebarToggle = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
+
+    useEffect(() => {
+        const handleBackgroundClick = () => {
+            setIsSidebarOpen(false);
+        };
+
+        const backgroundElement = document.getElementById("background-element");
+
+        if (isSidebarOpen && backgroundElement) {
+            backgroundElement.addEventListener("click", handleBackgroundClick);
+        }
+
+        return () => {
+            if (backgroundElement) {
+                backgroundElement.removeEventListener("click", handleBackgroundClick);
+            }
+        };
+    }, [isSidebarOpen]);
+
     return (
         <>
             <header className="flex justify-between items-center p-7 text-sm text-gray-500 md:justify-center md:ml-60 border-b border-grey-400">
                 <button
+                    onClick={() => handleSidebarToggle()}
                     data-drawer-target="logo-sidebar"
                     data-drawer-toggle="logo-sidebar"
                     aria-controls="logo-sidebar"
@@ -33,7 +60,8 @@ export const SideBar = () => {
 
             <aside
                 id="logo-sidebar"
-                className={`fixed top-0 left-0 z-40 bg-gray-500 h-full w-60 transition-transform `}
+                ref={sidebarRef}
+                className={`fixed top-0 left-0 z-40 bg-gray-500 h-full w-60 transition-transform md:translate-x-0 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} `}
                 aria-label="Sidebar"
             >
                 <ProfileAdmin />

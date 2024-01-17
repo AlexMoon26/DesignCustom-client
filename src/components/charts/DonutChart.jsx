@@ -24,6 +24,7 @@ const MyDoughnutChart = (props) => {
 
     return (
         <div
+            className="max-sm:w-32 max-sm:h-32 max-md:w-30 max-md:h-30 max-lg:w-40 max-lg:h-40"
             style={{ position: "relative" }}
         >
             <Doughnut data={data} options={options} />

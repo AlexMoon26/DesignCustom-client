@@ -3,7 +3,7 @@ import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import { Home } from './pages/Home'
 
-import { LayoutAdmin } from './components/LayoutAdmin/LayoutAdmin'
+import { LayoutAdmin } from './layouts/LayoutAdmin'
 import { HomeAdmin, OrdersAdmin, GoodsAdmin, PromoAdmin } from './pages/admin/'
 
 
