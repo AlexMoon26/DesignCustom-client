@@ -16,7 +16,7 @@ export const ItemCard = ({ name, price, pic }) => {
             <div className="flex flex-col justify-between w-1/2">
                 <div className="flex flex-col justify-around h-full">
                     <div className="flex justify-end">
-                        <Typography fontSize={20} textAlign="right">{name}</Typography>
+                        <Typography fontWeight="bold" textAlign="right">{name}</Typography>
                     </div>
                     <div className='flex justify-end'> <Typography>{price} Р</Typography></div>
                 </div>
