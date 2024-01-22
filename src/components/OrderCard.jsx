@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { MoreHoriz } from '@mui/icons-material';
-import { Box, Button, Menu, MenuItem, Typography } from '@mui/material'
+import { Box, IconButton, Menu, MenuItem, Typography } from '@mui/material'
 import dayjs from 'dayjs'
 import { useState } from 'react';
 import { ModalOrder } from './Modals/ModalOrder';
@@ -57,7 +57,7 @@ export const OrderCard = ({ clientName, status, email, date, phone, price }) => 
                             <Typography className="font-normal text-gray-500 dark:text-gray-400">
                                 {dayjs(date).format("DD.MM.YY")}
                             </Typography>
-                            <Button
+                            <IconButton
                                 variant="text"
                                 id="basic-button"
                                 aria-controls={open ? 'basic-menu' : undefined}
@@ -66,7 +66,7 @@ export const OrderCard = ({ clientName, status, email, date, phone, price }) => 
                                 onClick={handleClick}
                             >
                                 <MoreHoriz />
-                            </Button>
+                            </IconButton>
                             <Menu
                                 id="basic-menu"
                                 anchorEl={options}
@@ -82,8 +82,8 @@ export const OrderCard = ({ clientName, status, email, date, phone, price }) => 
                                         filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
                                         mt: 1.5,
                                         '& .MuiAvatar-root': {
-                                            width: 32,
-                                            height: 32,
+                                            width: 10,
+                                            height: 10,
                                             ml: -4.5,
                                             mr: 10,
                                         },
@@ -107,7 +107,7 @@ export const OrderCard = ({ clientName, status, email, date, phone, price }) => 
                                 <MenuItem onClick={handleModal}>Подробнее</MenuItem>
                             </Menu>
                         </Box>
-                        <div className='flex justify-end'> <Typography>{price} Р</Typography></div>
+                        <div className='flex justify-end'> <Typography fontSize={14}>{price} Р</Typography></div>
                     </div>
                 </div>
             </div>

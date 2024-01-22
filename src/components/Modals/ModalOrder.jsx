@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
-import { Box, Input, Modal, Typography } from '@mui/material'
+import { Box, IconButton, Input, Modal, Typography } from '@mui/material'
 import dayjs from 'dayjs'
 import { goods } from '../../data/data'
 import { ItemCard } from '../ItemCard'
 import { useScreenWidth } from '../../hooks/useScreenWidth.jsx'
+import { Close } from '@mui/icons-material'
 
 export const ModalOrder = ({ open, handleModal }) => {
     const { isDesktop } = useScreenWidth()
@@ -26,9 +27,20 @@ export const ModalOrder = ({ open, handleModal }) => {
             aria-describedby="modal-modal-description"
         >
             <Box sx={BoxStyle}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                    Информация о заказе № 1
-                </Typography>
+                <Box className="flex justify-between items-center">
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                        Информация о заказе № 1
+                    </Typography>
+                    <IconButton
+                        onClick={handleModal}
+                        size="large"
+                        aria-label="account of current user"
+                        aria-controls="primary-search-account-menu"
+                        aria-haspopup="true"
+                        color="inherit">
+                        <Close />
+                    </IconButton>
+                </Box>
                 <Box id="modal-modal-description" sx={{ mt: 2 }} className="flex flex-col gap-10">
                     <Box className="flex flex-col">
                         <Box className="flex justify-between gap-4">
