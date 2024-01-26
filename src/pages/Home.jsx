@@ -29,7 +29,7 @@ export const Home = () => {
                             <Box
                                 height="480px"
                                 width="100vw"
-                                sx={{ backgroundImage: "url(/avatar.jpg)", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
+                                sx={{ backgroundImage: "url(/banner.jpg)", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
                                 position="relative"
                             >
                                 <Box>
@@ -43,7 +43,7 @@ export const Home = () => {
                             <Box
                                 height="480px"
                                 width="100vw"
-                                sx={{ backgroundImage: "url(/avatar.jpg)", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
+                                sx={{ backgroundImage: "url(/banner.jpg)", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
                                 position="relative"
                                 bgr="no-repeat"
                             >
@@ -58,7 +58,7 @@ export const Home = () => {
                             <Box
                                 height="480px"
                                 width="100vw"
-                                sx={{ backgroundImage: "url(/avatar.jpg)", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
+                                sx={{ backgroundImage: "url(/banner.jpg)", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
                                 position="relative"
                                 bgr="no-repeat"
                             >
@@ -82,7 +82,7 @@ export const Home = () => {
                         <Box
                             height="480px"
                             width="100vw"
-                            sx={{ backgroundImage: "url(/avatar.jpg)", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
+                            sx={{ backgroundImage: "url(/banner.jpg)", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
                             position="relative"
                         >
                             <Box>
@@ -96,7 +96,7 @@ export const Home = () => {
                         <Box
                             height="480px"
                             width="100vw"
-                            sx={{ backgroundImage: "url(/avatar.jpg)", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
+                            sx={{ backgroundImage: "url(/banner.jpg)", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
                             position="relative"
                             bgr="no-repeat"
                         >
@@ -111,7 +111,7 @@ export const Home = () => {
                         <Box
                             height="480px"
                             width="100vw"
-                            sx={{ backgroundImage: "url(/avatar.jpg)", backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
+                            sx={{ backgroundImage: "url(/banner.jpg)", backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
                             position="relative"
                             bgr="no-repeat"
                         >

@@ -33,50 +33,69 @@ export const orders = [
     },
 ]
 
+export const shirts = ["black-1.jpg", "black-2.jpg", "gray-1.jpg", "gray-2.jpg"]
+
 export const goods = [
     {
         name: "Майка Nike Jordan 2024",
-        pic: "/avatar.jpg",
+        pic: `/shirts/${shirts[0]}`,
         price: 3600
     },
     {
         name: "Майка Nike Jordan 2024",
-        pic: "/avatar.jpg",
+        pic: `/shirts/${shirts[1]}`,
         price: 3600
     },
     {
         name: "Майка Nike Jordan 2024",
-        pic: "/avatar.jpg",
+         pic: `/shirts/${shirts[2]}`,
         price: 3600
     },
     {
         name: "Майка Nike Jordan 2024",
-        pic: "/avatar.jpg",
+        pic: `/shirts/${shirts[3]}`,
         price: 3600
     },
     {
         name: "Майка Nike Jordan 2024",
-        pic: "/avatar.jpg",
+        pic: `/shirts/${shirts[0]}`,
         price: 3600
     },
     {
         name: "Майка Nike Jordan 2024",
-        pic: "/avatar.jpg",
+        pic: `/shirts/${shirts[1]}`,
         price: 3600
     },
     {
         name: "Майка Nike Jordan 2024",
-        pic: "/avatar.jpg",
+         pic: `/shirts/${shirts[2]}`,
         price: 3600
     },
     {
         name: "Майка Nike Jordan 2024",
-        pic: "/avatar.jpg",
+        pic: `/shirts/${shirts[3]}`,
+        price: 3600
+    },
+     {
+        name: "Майка Nike Jordan 2024",
+        pic: `/shirts/${shirts[0]}`,
         price: 3600
     },
     {
         name: "Майка Nike Jordan 2024",
-        pic: "/avatar.jpg",
+        pic: `/shirts/${shirts[1]}`,
         price: 3600
     },
-]
+    {
+        name: "Майка Nike Jordan 2024",
+         pic: `/shirts/${shirts[2]}`,
+        price: 3600
+    },
+    {
+        name: "Майка Nike Jordan 2024",
+        pic: `/shirts/${shirts[3]}`,
+        price: 3600
+    },
+];
+
+
