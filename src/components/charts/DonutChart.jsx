@@ -1,51 +1,70 @@
 /* eslint-disable react/prop-types */
-import { Chart as ChartJS, Tooltip, ArcElement, Legend } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+import faker from 'faker';
+import dayjs from 'dayjs';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+import ru from 'dayjs/locale/ru';
 
-// Register ChartJS components using ChartJS.register
-ChartJS.register(ArcElement, Tooltip, Legend);
 
-const MyDoughnutChart = (props) => {
+dayjs.extend(localizedFormat);
+dayjs.locale(ru);
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend
+);
+
+const options = {
+    responsive: true,
+    plugins: {
+        legend: {
+            position: 'top',
+        },
+        title: {
+            display: true,
+            text: 'Заказы',
+        },
+    },
+};
+
+const labels = [dayjs().format('MMMM')];
+
+function App({ backgroundColor }) {
     const data = {
+        labels,
         datasets: [
             {
-                data: [props.allData - props.filled, props.filled], // Распределение между фоном и активной частью
-                backgroundColor: ["#D9D9D9", `${props.backgroundColor}`],
-                cutout: "80%", // Процент вырезки для внутренней части
-                borderWidth: 0, // Убираем границу
-                borderCapStyle: "round",
+                label: 'Заказы',
+                data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            },
+            {
+                label: 'Клиенты',
+                data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+                backgroundColor: backgroundColor,
+            },
+            {
+                label: 'Продажи',
+                data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
             },
         ],
     };
 
-    const options = {
-        borderCapStyle: "round",
-    };
+    return <Bar options={options} data={data} />;
+}
 
-    return (
-        <div
-            className="max-sm:w-32 max-sm:h-32 max-md:w-30 max-md:h-30 max-lg:w-40 max-lg:h-40"
-            style={{ position: "relative" }}
-        >
-            <Doughnut data={data} options={options} />
-            <div
-                style={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    textAlign: "center",
-                }}
-            >
-                <h3 className="text-3xl" style={{ color: props.backgroundColor }}>
-                    {props.filled}
-                </h3>
-                <h3 className="max-md:text-sm" style={{ color: props.backgroundColor }}>
-                    {props.name}
-                </h3>
-            </div>
-        </div>
-    );
-};
-
-export default MyDoughnutChart
+export default App;
