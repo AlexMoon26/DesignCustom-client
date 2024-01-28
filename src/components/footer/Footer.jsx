@@ -24,12 +24,12 @@ export const Footer = () => {
           </Box>
           <Box>
             <IconButton size="large">
-              <Link to="https://vk.com" target="_blank">
+              <Link to="https://vk.com/club224447209" target="_blank">
                 <img src="/icons/vk.svg" alt="VK" className="w-10 h-10" />
               </Link>
             </IconButton>
             <IconButton size="large">
-              <Link to="https://web.telegram.org" target="_blank">
+              <Link to="https://t.me/Design_Custom1" target="_blank">
                 <img
                   src="/icons/telegram.svg"
                   alt="Telegram"
