@@ -2,12 +2,23 @@
 import { Box, IconButton, Typography } from "@mui/material";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export const ItemCardVertical = ({ name, price, pic }) => {
+export const ItemCardVertical = ({ name, category, price, pic, id }) => {
   const [likedItem, setLikedItem] = useState(false);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/${category}/${id}`);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
-    <div
-      className={`flex flex-col text-xs md:text-sm xxl:text-lg rounded-l hover:shadow hover:bg-gray-50 p-5 rounded bg-white`}
+    <Box
+      onClick={() => handleClick()}
+      className={`flex flex-col text-xs md:text-sm xxl:text-lg rounded-l hover:shadow hover:bg-gray-50 cursor-pointer p-5 rounded bg-white`}
       role="list"
     >
       <Box className="items-center justify-center">
@@ -21,7 +32,10 @@ export const ItemCardVertical = ({ name, price, pic }) => {
         </Box>
         <Box>
           <IconButton
-            onClick={() => setLikedItem(!likedItem)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setLikedItem(!likedItem);
+            }}
             size="large"
             aria-label="account of current user"
             aria-controls="primary-search-account-menu"
@@ -32,6 +46,6 @@ export const ItemCardVertical = ({ name, price, pic }) => {
           </IconButton>
         </Box>
       </Box>
-    </div>
+    </Box>
   );
 };

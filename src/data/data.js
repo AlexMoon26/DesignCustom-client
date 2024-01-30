@@ -26,7 +26,7 @@ export const orders = [
   {
     customerName: "Деды Эльдар",
     email: "eldedy@mail.ru",
-    status: "Выполняется",
+    status: "Выполнен",
     price: 3600,
     date: "05.03.23",
     phone: "8-800-800-88-88",
@@ -42,65 +42,34 @@ export const shirts = [
 
 export const goods = [
   {
-    name: "Майка Nike Jordan 2024",
+    id: 1,
+    name: "Футболка черная с логотипом",
     pic: `/shirts/${shirts[0]}`,
+    category: "tshirts",
     price: 3600,
   },
   {
-    name: "Майка Nike Jordan 2024",
+    id: 2,
+    name: "Футболка черная с надписью",
     pic: `/shirts/${shirts[1]}`,
+    category: "tshirts",
     price: 3600,
   },
   {
-    name: "Майка Nike Jordan 2024",
+    id: 3,
+    name: "Футболка серая с рисунком",
     pic: `/shirts/${shirts[2]}`,
+    category: "tshirts",
     price: 3600,
   },
   {
-    name: "Майка Nike Jordan 2024",
+    id: 4,
+    name: "Футболка дизайнерская Drunk D",
     pic: `/shirts/${shirts[3]}`,
     price: 3600,
+    category: "designer-clothing",
   },
-  {
-    name: "Майка Nike Jordan 2024",
-    pic: `/shirts/${shirts[0]}`,
-    price: 3600,
-  },
-  {
-    name: "Майка Nike Jordan 2024",
-    pic: `/shirts/${shirts[1]}`,
-    price: 3600,
-  },
-  {
-    name: "Майка Nike Jordan 2024",
-    pic: `/shirts/${shirts[2]}`,
-    price: 3600,
-  },
-  {
-    name: "Майка Nike Jordan 2024",
-    pic: `/shirts/${shirts[3]}`,
-    price: 3600,
-  },
-  {
-    name: "Майка Nike Jordan 2024",
-    pic: `/shirts/${shirts[0]}`,
-    price: 3600,
-  },
-  {
-    name: "Майка Nike Jordan 2024",
-    pic: `/shirts/${shirts[1]}`,
-    price: 3600,
-  },
-  {
-    name: "Майка Nike Jordan 2024",
-    pic: `/shirts/${shirts[2]}`,
-    price: 3600,
-  },
-  {
-    name: "Майка Nike Jordan 2024",
-    pic: `/shirts/${shirts[3]}`,
-    price: 3600,
-  },
+ 
 ];
 
 export const listNav = [

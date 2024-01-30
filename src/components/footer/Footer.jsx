@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 
 export const Footer = () => {
   return (
-    <Box mt={10} className="border py-20">
+    <Box className="border mt-4 flex py-20">
       <Box
-        className="flex justify-between w-full"
+        className="flex max-md:flex-col justify-between w-full"
         sx={{ px: { xs: 2, lg: 10 } }}
       >
         <Box className="flex flex-col justify-end">
@@ -23,19 +23,25 @@ export const Footer = () => {
             </IconButton>
           </Box>
           <Box>
-            <IconButton size="large">
-              <Link to="https://vk.com/club224447209" target="_blank">
-                <img src="/icons/vk.svg" alt="VK" className="w-10 h-10" />
-              </Link>
+            <IconButton
+              size="large"
+              component={Link}
+              to={"https://vk.com/club224447209"}
+              target="_blank"
+            >
+              <img src="/icons/vk.svg" alt="VK" className="w-10 h-10" />
             </IconButton>
-            <IconButton size="large">
-              <Link to="https://t.me/Design_Custom1" target="_blank">
-                <img
-                  src="/icons/telegram.svg"
-                  alt="Telegram"
-                  className="w-10 h-10"
-                />
-              </Link>
+            <IconButton
+              size="large"
+              component={Link}
+              to={"https://t.me/Design_Custom1"}
+              target="_blank"
+            >
+              <img
+                src="/icons/telegram.svg"
+                alt="Telegram"
+                className="w-10 h-10"
+              />
             </IconButton>
           </Box>
         </Box>
