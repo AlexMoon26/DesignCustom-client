@@ -12,7 +12,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import { Favorite, FontDownload, ShoppingCart } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
-export const Header = () => {
+const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -183,3 +183,5 @@ export const Header = () => {
     </Box>
   );
 };
+
+export default Header;
