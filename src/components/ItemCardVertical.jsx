@@ -26,24 +26,24 @@ export const ItemCardVertical = ({ name, category, price, pic, id }) => {
       </Box>
 
       <Box className="flex justify-between mt-5">
-        <Box className="flex flex-col">
+        <Box className="flex flex-col ">
           <Typography fontWeight="bold">{name}</Typography>
           <Typography>{price} Р</Typography>
-        </Box>
-        <Box>
-          <IconButton
-            onClick={(e) => {
-              e.stopPropagation();
-              setLikedItem(!likedItem);
-            }}
-            size="large"
-            aria-label="account of current user"
-            aria-controls="primary-search-account-menu"
-            aria-haspopup="true"
-            color="inherit"
-          >
-            {likedItem ? <Favorite /> : <FavoriteBorder />}
-          </IconButton>
+          <Box className="flex justify-end">
+            <IconButton
+              onClick={(e) => {
+                e.stopPropagation();
+                setLikedItem(!likedItem);
+              }}
+              size="large"
+              aria-label="account of current user"
+              aria-controls="primary-search-account-menu"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              {likedItem ? <Favorite /> : <FavoriteBorder />}
+            </IconButton>
+          </Box>
         </Box>
       </Box>
     </Box>

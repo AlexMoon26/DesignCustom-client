@@ -99,7 +99,7 @@ export const SlideBar = () => {
               <Box
                 height="480px"
                 sx={{
-                  backgroundImage: "url(/banners/1.png)",
+                  backgroundImage: "url(/banners/1-small.png)",
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
@@ -120,7 +120,7 @@ export const SlideBar = () => {
                 height="480px"
                 width="100vw"
                 sx={{
-                  backgroundImage: "url(/banners/2.png)",
+                  backgroundImage: "url(/banners/2-small.png)",
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
@@ -142,7 +142,7 @@ export const SlideBar = () => {
                 height="480px"
                 width="100vw"
                 sx={{
-                  backgroundImage: "url(/banners/3.png)",
+                  backgroundImage: "url(/banners/3-small.png)",
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",

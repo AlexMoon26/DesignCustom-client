@@ -54,9 +54,15 @@ export const ModalRegister = ({ open, handleClose }) => {
           </Button>
         </Box>
         <form className="flex flex-col mt-4 gap-4 items-center">
-          <TextField fullWidth label="Номер телефона" />
-          <TextField fullWidth label="Пароль" />
-          <Button className="w-[50%] mx-auto">Войти</Button>
+          {isAuthSelected ? (
+            <>
+              <TextField fullWidth label="Номер телефона" />
+              <TextField fullWidth label="Пароль" />
+              <Button className="w-[50%] mx-auto">Войти</Button>
+            </>
+          ) : (
+            <></>
+          )}
         </form>
       </Box>
     </Modal>
