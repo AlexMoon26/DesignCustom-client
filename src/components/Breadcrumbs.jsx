@@ -1,7 +1,9 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Link, useLocation } from "react-router-dom";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Typography from "@mui/material/Typography";
+import { goods } from "../data/data";
 
 const breadcrumbNameMap = {
   "/": "Главная",
@@ -9,7 +11,7 @@ const breadcrumbNameMap = {
   "/designer-clothing": "Дизайнерская одежда",
 };
 
-const generateBreadcrumbs = () => {
+const generateBreadcrumbs = ({ item }) => {
   const location = useLocation();
   const pathnames = location.pathname.split("/").filter((x) => x);
 
@@ -18,13 +20,19 @@ const generateBreadcrumbs = () => {
     const breadcrumbName = breadcrumbNameMap[routeTo];
 
     if (index === pathnames.length - 1) {
-      // Проверяем, является ли последний сегмент числом
-      const id = parseInt(name, 10);
-      const isNumber = !isNaN(id);
+      let itemName = "";
+      if (item) {
+        const itemId = parseInt(name, 10);
+        const foundItem = goods.find((good) => good.id === itemId);
+        if (foundItem) {
+          itemName = foundItem.name;
+        }
+      }
 
       return (
         <Typography key={index} color="textPrimary">
-          {breadcrumbName} {isNumber ? id : ""}
+          {breadcrumbName}
+          {itemName}
         </Typography>
       );
     }
@@ -37,13 +45,13 @@ const generateBreadcrumbs = () => {
   });
 };
 
-export const BreadCrumbs = () => {
+export const BreadCrumbs = ({ item }) => {
   return (
     <Breadcrumbs aria-label="breadcrumb">
       <Typography component={Link} to="/" color="inherit">
         Главная
       </Typography>
-      {generateBreadcrumbs()}
+      {generateBreadcrumbs({ item })}
     </Breadcrumbs>
   );
 };

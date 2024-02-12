@@ -4,12 +4,12 @@ import { goods } from "../data/data";
 import { Box, Typography } from "@mui/material";
 import { BreadCrumbs } from "../components/Breadcrumbs";
 
-export const SingleTshirtPage = () => {
+export const SingleItemPage = () => {
   const { id } = useParams();
   return (
     <>
       <Wrapper>
-        <BreadCrumbs />
+        <BreadCrumbs item={goods.filter((item) => item.id == id)} />
         {goods
           .filter((item) => item.id == id)
           .map((item, i) => (

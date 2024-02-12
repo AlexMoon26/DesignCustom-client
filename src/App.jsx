@@ -7,7 +7,7 @@ import { HomeAdmin, OrdersAdmin, GoodsAdmin, PromoAdmin } from "./pages/admin/";
 import { TshirtsPage } from "./pages/TshirtsPage";
 import { Home } from "./pages/Home";
 import { DesignerClothing } from "./pages/DesignerClothing";
-import { SingleTshirtPage } from "./pages/SingleItemPage";
+import { SingleItemPage } from "./pages/SingleItemPage";
 
 function App() {
   return (
@@ -16,9 +16,9 @@ function App() {
         <Route path="/" element={<LayoutMain />}>
           <Route index element={<Home />} />
           <Route path="tshirts" element={<TshirtsPage />} />
-          <Route path="tshirts/:id" element={<SingleTshirtPage />} />
+          <Route path="tshirts/:id" element={<SingleItemPage />} />
           <Route path="designer-clothing" element={<DesignerClothing />} />
-          <Route path="designer-clothing/:id" element={<SingleTshirtPage />} />
+          <Route path="designer-clothing/:id" element={<SingleItemPage />} />
         </Route>
         <Route path="/admin" element={<LayoutAdmin />}>
           <Route index element={<HomeAdmin />} />
