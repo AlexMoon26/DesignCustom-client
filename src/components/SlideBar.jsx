@@ -25,7 +25,7 @@ export const SlideBar = () => {
                 height="480px"
                 width="100vw"
                 sx={{
-                  backgroundImage: "url(/banner.jpg)",
+                  backgroundImage: "url(/banners/1.png)",
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
@@ -46,7 +46,7 @@ export const SlideBar = () => {
                 height="480px"
                 width="100vw"
                 sx={{
-                  backgroundImage: "url(/banner.jpg)",
+                  backgroundImage: "url(/banners/2.png)",
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
@@ -68,7 +68,7 @@ export const SlideBar = () => {
                 height="480px"
                 width="100vw"
                 sx={{
-                  backgroundImage: "url(/banner.jpg)",
+                  backgroundImage: "url(/banners/3.png)",
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
@@ -99,7 +99,7 @@ export const SlideBar = () => {
               <Box
                 height="480px"
                 sx={{
-                  backgroundImage: "url(/banner.jpg)",
+                  backgroundImage: "url(/banners/1.png)",
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
@@ -120,7 +120,7 @@ export const SlideBar = () => {
                 height="480px"
                 width="100vw"
                 sx={{
-                  backgroundImage: "url(/banner.jpg)",
+                  backgroundImage: "url(/banners/2.png)",
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
@@ -142,7 +142,7 @@ export const SlideBar = () => {
                 height="480px"
                 width="100vw"
                 sx={{
-                  backgroundImage: "url(/banner.jpg)",
+                  backgroundImage: "url(/banners/3.png)",
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
