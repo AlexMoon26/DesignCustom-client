@@ -5,11 +5,10 @@ import { Box } from "@mui/material";
 import { useScreenWidth } from "../hooks/useScreenWidth";
 
 export const LayoutMain = () => {
-  const { isDesktop } = useScreenWidth();
   return (
     <Box minHeight={"100vh"} className="">
       <Header />
-      <Box className={`mt-16 ${isDesktop && "pt-20"}`}>
+      <Box className={`pt-20 min-h-[75vh]`}>
         <Outlet />
       </Box>
       <Footer />

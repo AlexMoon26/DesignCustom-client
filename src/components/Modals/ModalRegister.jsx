@@ -3,20 +3,29 @@ import {
   Box,
   Button,
   Checkbox,
+  FormControl,
   FormControlLabel,
   FormGroup,
+  IconButton,
+  InputAdornment,
+  InputLabel,
   Modal,
+  OutlinedInput,
   TextField,
 } from "@mui/material";
 import { useScreenWidth } from "../../hooks/useScreenWidth.jsx";
 import { useState } from "react";
 import { useFormik } from "formik";
 import axios from "../../axios.js";
+import { AppState } from "../../Context/AppProvider.jsx";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 export const ModalRegister = ({ open, handleClose }) => {
   const [isAuthSelected, setIsAuthSelected] = useState(true);
   const [isError, setIsError] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const { isDesktop } = useScreenWidth();
+  const { setUser } = AppState();
 
   const BoxStyle = () => ({
     position: "absolute",
@@ -29,6 +38,14 @@ export const ModalRegister = ({ open, handleClose }) => {
     p: 4,
   });
 
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
   const formikAuth = useFormik({
     initialValues: {
       email: "",
@@ -39,6 +56,8 @@ export const ModalRegister = ({ open, handleClose }) => {
         axios.post("/auth/login", values).then((res) => {
           if (res.status == 200) {
             localStorage.setItem("token", res.data.token);
+            localStorage.setItem("userInfo", JSON.stringify(res.data.user));
+            setUser(JSON.stringify(res.data.user));
             alert("Успешная авторизация!");
             handleClose();
           } else {
@@ -126,21 +145,37 @@ export const ModalRegister = ({ open, handleClose }) => {
               helperText={formikAuth.touched.email && formikAuth.errors.email}
               label="Email"
             />
-            <TextField
-              fullWidth
-              name="password"
-              value={formikAuth.values.password}
-              onChange={formikAuth.handleChange}
-              onBlur={formikAuth.handleBlur}
-              error={
-                formikAuth.touched.password &&
-                Boolean(formikAuth.errors.password)
-              }
-              helperText={
-                formikAuth.touched.password && formikAuth.errors.password
-              }
-              label="Пароль"
-            />
+            <FormControl fullWidth variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">
+                Пароль
+              </InputLabel>
+              <OutlinedInput
+                fullWidth
+                id="outlined-adornment-password"
+                name="password"
+                value={formikAuth.values.password}
+                onChange={formikAuth.handleChange}
+                onBlur={formikAuth.handleBlur}
+                error={
+                  formikAuth.touched.password &&
+                  Boolean(formikAuth.errors.password)
+                }
+                label="Пароль"
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
             {isError && (
               <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <p className="text-red-600">Неверный логин или пароль!</p>
@@ -166,22 +201,37 @@ export const ModalRegister = ({ open, handleClose }) => {
               required
               label="Email"
             />
-            <TextField
-              fullWidth
-              type="password"
-              name="password"
-              value={formikReg.values.password}
-              onChange={formikReg.handleChange}
-              onBlur={formikReg.handleBlur}
-              error={
-                formikReg.touched.password && Boolean(formikReg.errors.password)
-              }
-              helperText={
-                formikReg.touched.password && formikReg.errors.password
-              }
-              required
-              label="Пароль"
-            />
+            <FormControl fullWidth variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">
+                Пароль
+              </InputLabel>
+              <OutlinedInput
+                fullWidth
+                id="outlined-adornment-password"
+                name="password"
+                value={formikReg.values.password}
+                onChange={formikReg.handleChange}
+                onBlur={formikReg.handleBlur}
+                error={
+                  formikReg.touched.password &&
+                  Boolean(formikReg.errors.password)
+                }
+                label="Пароль"
+                type={showPassword ? "text" : "password"}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
             <FormGroup>
               <FormControlLabel
                 required

@@ -16,8 +16,9 @@ import {
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ModalRegister } from "../components/Modals/ModalRegister.jsx";
+import { LogOut } from "../Context/AppProvider.jsx";
 
 export const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -79,9 +80,10 @@ export const Header = () => {
         onClick={() => {
           handleMenuClose();
           localStorage.removeItem("token");
+          localStorage.removeItem("userInfo");
         }}
       >
-        Выйти
+        <LogOut />
       </MenuItem>
     </Menu>
   );
@@ -127,7 +129,7 @@ export const Header = () => {
         </IconButton>
         <p>Понравившиеся</p>
       </MenuItem>
-      <MenuItem>
+      <MenuItem onClick={() => (router("/basket"), handleMenuClose())}>
         <IconButton size="large" aria-label="cart" color="inherit">
           <Badge badgeContent={2} color="error">
             <ShoppingCart />
@@ -150,6 +152,7 @@ export const Header = () => {
       <MenuItem
         onClick={() => {
           localStorage.removeItem("token");
+          localStorage.removeItem("userInfo");
           handleMobileMenuClose();
         }}
       >
@@ -162,7 +165,7 @@ export const Header = () => {
         >
           <ExitToApp />
         </IconButton>
-        <p>Выйти</p>
+        <LogOut />
       </MenuItem>
     </Menu>
   );
