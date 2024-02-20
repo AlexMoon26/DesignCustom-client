@@ -6,12 +6,12 @@ export const LatestCustomers = ({ orders }) => {
     <>
       <div className="w-full p-4 bg-white border border-gray-200 rounded shadow sm:p-8 ">
         <div className="flex items-center justify-between mb-4">
-          <h5 className="text-xl font-bold leading-none text-gray-600">
+          <h5 className="text-xl truncate font-bold leading-none text-gray-600">
             Выполненные заказы
           </h5>
           <Link
             to={"/admin/orders"}
-            className="text-sm font-medium text-gray-500 hover:underline"
+            className="text-sm truncate font-medium text-gray-500 hover:underline"
           >
             Посмотреть все
           </Link>
@@ -25,7 +25,7 @@ export const LatestCustomers = ({ orders }) => {
                     <img
                       className="rounded-full"
                       src="avatar.jpg"
-                      alt="Lana image"
+                      alt="image"
                       width={50}
                       height={50}
                     />
@@ -38,10 +38,10 @@ export const LatestCustomers = ({ orders }) => {
                       {order.email}
                     </p>
                   </div>
-                  <div className="inline-flex items-center text-base font-semibold text-gray-600">
+                  <div className="inline-flex truncate items-center text-base font-semibold text-gray-600">
                     {order.price} Р
                   </div>
-                  <div className="inline-flex items-center text-base font-semibold text-gray-400">
+                  <div className="inline-flex truncate items-center text-base font-semibold text-gray-400">
                     {order.date}
                   </div>
                 </div>
