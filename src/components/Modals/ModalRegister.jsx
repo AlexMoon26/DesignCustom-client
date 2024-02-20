@@ -239,7 +239,6 @@ export const ModalRegister = ({ open, handleClose }) => {
                 label="Согласие на обработку персональных данных"
               />
               <FormControlLabel
-                required
                 control={<Checkbox />}
                 label="Согласие на рассылку"
               />
