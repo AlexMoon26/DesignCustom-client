@@ -8,7 +8,12 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { Favorite, FontDownload, ShoppingCart } from "@mui/icons-material";
+import {
+  ExitToApp,
+  Favorite,
+  FontDownload,
+  ShoppingCart,
+} from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import { useState } from "react";
@@ -48,6 +53,7 @@ export const Header = () => {
 
   const handleModalAuthClose = () => {
     setIsOpenModalAuth(false);
+    handleMobileMenuClose();
   };
 
   const menuId = "menu";
@@ -67,8 +73,16 @@ export const Header = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Профиль</MenuItem>
+      <MenuItem onClick={() => router("/profile")}>Профиль</MenuItem>
       <MenuItem onClick={() => router("/admin")}>Админ панель</MenuItem>
+      <MenuItem
+        onClick={() => {
+          handleMenuClose();
+          localStorage.removeItem("token");
+        }}
+      >
+        Выйти
+      </MenuItem>
     </Menu>
   );
 
@@ -89,7 +103,7 @@ export const Header = () => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem onClick={() => router("/profile")}>
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -133,12 +147,29 @@ export const Header = () => {
         </IconButton>
         <p>Админ панель</p>
       </MenuItem>
+      <MenuItem
+        onClick={() => {
+          localStorage.removeItem("token");
+          handleMobileMenuClose();
+        }}
+      >
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <ExitToApp />
+        </IconButton>
+        <p>Выйти</p>
+      </MenuItem>
     </Menu>
   );
 
   return (
     <Box>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }} />
           <Typography variant="h6" noWrap component="div">
@@ -158,6 +189,7 @@ export const Header = () => {
                   </Badge>
                 </IconButton>
                 <IconButton
+                  onClick={() => router("/basket")}
                   size="large"
                   aria-label="show 17 new notifications"
                   color="inherit"

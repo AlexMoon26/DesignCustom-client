@@ -9,7 +9,7 @@ export const LayoutMain = () => {
   return (
     <Box minHeight={"100vh"} className="">
       <Header />
-      <Box className={`${isDesktop && "mt-4"}`}>
+      <Box className={`mt-16 ${isDesktop && "pt-20"}`}>
         <Outlet />
       </Box>
       <Footer />

@@ -18,15 +18,15 @@ export const ItemCardVertical = ({ name, category, price, pic, id }) => {
   return (
     <Box
       onClick={() => handleClick()}
-      className={`flex flex-col text-xs md:text-sm xxl:text-lg rounded-l hover:shadow hover:bg-gray-50 cursor-pointer p-5 rounded bg-white`}
+      className={`flex flex-col justify-between text-xs md:text-sm xxl:text-lg rounded-l hover:shadow hover:bg-gray-50 min-h-[387.5px] cursor-pointer p-5 rounded bg-white`}
       role="list"
     >
       <Box className="items-center justify-center">
         <img className="rounded-md" src={pic} alt="" />
       </Box>
 
-      <Box className="flex justify-between mt-5">
-        <Box className="flex flex-col ">
+      <Box className="h-[120px]">
+        <Box className="flex flex-col">
           <Typography fontWeight="bold">{name}</Typography>
           <Typography>{price} Р</Typography>
           <Box className="flex justify-end">

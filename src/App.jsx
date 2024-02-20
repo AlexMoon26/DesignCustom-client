@@ -8,6 +8,7 @@ import { TshirtsPage } from "./pages/TshirtsPage";
 import { Home } from "./pages/Home";
 import { DesignerClothing } from "./pages/DesignerClothing";
 import { SingleItemPage } from "./pages/SingleItemPage";
+import { BasketPage } from "./pages/BasketPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<LayoutMain />}>
           <Route index element={<Home />} />
           <Route path="tshirts" element={<TshirtsPage />} />
+          <Route path="basket" element={<BasketPage />} />
           <Route path="tshirts/:id" element={<SingleItemPage />} />
           <Route path="designer-clothing" element={<DesignerClothing />} />
           <Route path="designer-clothing/:id" element={<SingleItemPage />} />
