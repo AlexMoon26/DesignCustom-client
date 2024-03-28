@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import {
   Box,
   Button,
@@ -19,6 +18,8 @@ import { useFormik } from "formik";
 import axios from "../../axios.js";
 import { AppState } from "../../Context/AppProvider.jsx";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+
+import * as Yup from "yup";
 
 export const ModalRegister = ({ open, handleClose }) => {
   const [isAuthSelected, setIsAuthSelected] = useState(true);
@@ -46,26 +47,40 @@ export const ModalRegister = ({ open, handleClose }) => {
     event.preventDefault();
   };
 
+  const SigninSchema = Yup.object().shape({
+    email: Yup.string().email("Неверный email").required("обязателен"),
+    password: Yup.string()
+      .min(8, "Пароль слишком короткий")
+      .required("обязателен"),
+  });
+
   const formikAuth = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
+    validationSchema: SigninSchema,
     onSubmit: async (values) => {
       try {
-        axios.post("/auth/login", values).then((res) => {
-          if (res.status == 200) {
-            localStorage.setItem("token", res.data.token);
-            localStorage.setItem("userInfo", JSON.stringify(res.data.user));
-            setUser(JSON.stringify(res.data.user));
+        axios
+          .post("/auth/login", values)
+          .then((response) => {
+            console.log(response);
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem(
+              "userInfo",
+              JSON.stringify(response.data.user)
+            );
+            setUser(JSON.stringify(response.data.user));
             alert("Успешная авторизация!");
             handleClose();
-          } else {
+          })
+          .catch((err) => {
             setIsError(true);
-          }
-        });
+            throw new Error("Ошибка авторизации");
+          });
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     },
   });
@@ -145,6 +160,7 @@ export const ModalRegister = ({ open, handleClose }) => {
               helperText={formikAuth.touched.email && formikAuth.errors.email}
               label="Email"
             />
+
             <FormControl fullWidth variant="outlined">
               <InputLabel htmlFor="outlined-adornment-password">
                 Пароль
@@ -156,6 +172,9 @@ export const ModalRegister = ({ open, handleClose }) => {
                 value={formikAuth.values.password}
                 onChange={formikAuth.handleChange}
                 onBlur={formikAuth.handleBlur}
+                helpertext={
+                  formikAuth.touched.password && formikAuth.errors.password
+                }
                 error={
                   formikAuth.touched.password &&
                   Boolean(formikAuth.errors.password)

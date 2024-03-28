@@ -2,7 +2,6 @@ import { Outlet } from "react-router-dom";
 import { Header } from "../components/Header";
 import { Footer } from "../components/footer/Footer";
 import { Box } from "@mui/material";
-import { useScreenWidth } from "../hooks/useScreenWidth";
 
 export const LayoutMain = () => {
   return (
