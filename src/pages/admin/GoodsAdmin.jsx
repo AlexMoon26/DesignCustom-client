@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   Box,
   Button,
@@ -13,8 +13,11 @@ import { goods } from "../../data/data";
 
 import SearchIcon from "@mui/icons-material/Search";
 import { useScreenWidth } from "../../hooks/useScreenWidth";
+import { ModalContext } from "../../components/modalContext";
+import { AddGoodForm } from "../../components/forms/addGoodForm";
 
 export const GoodsAdmin = () => {
+  const { openModal, closeModal } = useContext(ModalContext);
   const { isDesktop } = useScreenWidth();
 
   const [showTshirts, setShowTshirts] = useState(true);
@@ -28,6 +31,16 @@ export const GoodsAdmin = () => {
     setShowDesignerClothing(!showDesignerClothing);
   };
 
+  const handleAddGood = () => {
+    openModal({
+      component: AddGoodForm,
+      props: {
+        closeModal,
+      },
+      title: "Добавление товара",
+    });
+  };
+
   return (
     <Box display="flex" flexDirection="column" className="gap-4">
       <Box
@@ -39,7 +52,9 @@ export const GoodsAdmin = () => {
           className={`flex justify-center gap-4 py-4 ${isDesktop && "pr-4"}`}
           sx={isDesktop ? { width: "50%" } : {}}
         >
-          <Button fullWidth>Добавить</Button>
+          <Button onClick={handleAddGood} fullWidth>
+            Добавить
+          </Button>
           <Button fullWidth>Выбрать</Button>
         </Box>
         <TextField
