@@ -7,6 +7,7 @@ import { ThemeProvider } from "@mui/material";
 import { theme } from "./theme/theme.js";
 import AppProvider from "./Context/AppProvider.jsx";
 import { ModalProvider } from "./components/modalContext.jsx";
+import { Toaster } from "sonner";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -15,6 +16,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <AppProvider>
           <ModalProvider>
             <App />
+            <Toaster richColors theme="system" />
           </ModalProvider>
         </AppProvider>
       </ThemeProvider>
