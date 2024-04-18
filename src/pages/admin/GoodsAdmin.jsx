@@ -15,6 +15,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useScreenWidth } from "../../hooks/useScreenWidth";
 import { ModalContext } from "../../components/modalContext";
 import { AddGoodForm } from "../../components/forms/addGoodForm";
+import { EditGoodForm } from "../../components/forms/editGoodForm";
 
 export const GoodsAdmin = () => {
   const { openModal, closeModal } = useContext(ModalContext);
@@ -38,6 +39,17 @@ export const GoodsAdmin = () => {
         closeModal,
       },
       title: "Добавление товара",
+    });
+  };
+
+  const handleEditCloth = (cloth) => {
+    openModal({
+      component: EditGoodForm,
+      props: {
+        closeModal,
+        cloth,
+      },
+      title: "Изменение товара",
     });
   };
 
@@ -93,16 +105,17 @@ export const GoodsAdmin = () => {
       <Box className="grid grid-cols-3 max-xl:grid-cols-2 max-lg:grid-cols-1 gap-4">
         {goods.map((item, i) => {
           if (
-            (showTshirts && item.category === "tshirts") ||
-            (showDesignerClothing && item.category === "designer-clothing")
+            (showTshirts && item.category === "Футболки") ||
+            (showDesignerClothing && item.category === "Дизайнерская одежда")
           ) {
             return (
-              <ItemCard
+              <Box
                 key={i}
-                name={item.name}
-                pic={item.pic}
-                price={item.price}
-              />
+                className="hover:shadow hover:cursor-pointer"
+                onClick={() => handleEditCloth(item)}
+              >
+                <ItemCard name={item.name} pic={item.pic} price={item.price} />
+              </Box>
             );
           } else {
             return null;

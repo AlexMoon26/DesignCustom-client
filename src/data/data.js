@@ -45,31 +45,31 @@ export const goods = [
     id: 1,
     name: "Футболка черная с логотипом",
     pic: `/shirts/${shirts[0]}`,
-    category: "tshirts",
+    category: "Футболки",
     price: 3600,
   },
   {
     id: 2,
     name: "Футболка черная с надписью",
     pic: `/shirts/${shirts[1]}`,
-    category: "tshirts",
+    category: "Футболки",
     price: 3600,
   },
   {
     id: 3,
     name: "Футболка серая с рисунком",
     pic: `/shirts/${shirts[2]}`,
-    category: "tshirts",
+    category: "Футболки",
     price: 3600,
   },
   {
     id: 4,
     name: "Футболка дизайнерская Drunk D",
     pic: `/shirts/${shirts[3]}`,
-    price: 3600,
-    category: "designer-clothing",
+    cost: 3600,
+    count: 20,
+    category: "Дизайнерская одежда",
   },
- 
 ];
 
 export const listNav = [
