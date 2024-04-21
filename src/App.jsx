@@ -3,13 +3,7 @@ import { Route, Routes } from "react-router-dom";
 
 import { LayoutAdmin } from "./layouts/LayoutAdmin";
 import { LayoutMain } from "./layouts/LayoutMain";
-import {
-  HomeAdmin,
-  OrdersAdmin,
-  GoodsAdmin,
-  PromoAdmin,
-  BannersAdmin,
-} from "./pages/admin/";
+import { HomeAdmin, OrdersAdmin, GoodsAdmin, PromoAdmin } from "./pages/admin/";
 import { TshirtsPage } from "./pages/TshirtsPage";
 import { Home } from "./pages/Home";
 import { DesignerClothing } from "./pages/DesignerClothing";
@@ -33,7 +27,6 @@ function App() {
           <Route path="orders" element={<OrdersAdmin />} />
           <Route path="goods" element={<GoodsAdmin />} />
           <Route path="promo" element={<PromoAdmin />} />
-          <Route path="banners" element={<BannersAdmin />} />
         </Route>
       </Routes>
     </div>

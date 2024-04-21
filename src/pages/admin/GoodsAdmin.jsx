@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -9,15 +9,15 @@ import {
   TextField,
 } from "@mui/material";
 import { ItemCard } from "../../components/ItemCard";
-import { goods } from "../../data/data";
-
 import SearchIcon from "@mui/icons-material/Search";
 import { useScreenWidth } from "../../hooks/useScreenWidth";
 import { ModalContext } from "../../components/modalContext";
 import { AddGoodForm } from "../../components/forms/addGoodForm";
 import { EditGoodForm } from "../../components/forms/editGoodForm";
+import axios from "../../axios";
 
 export const GoodsAdmin = () => {
+  const [clothes, setClothes] = useState(null);
   const { openModal, closeModal } = useContext(ModalContext);
   const { isDesktop } = useScreenWidth();
 
@@ -32,11 +32,17 @@ export const GoodsAdmin = () => {
     setShowDesignerClothing(!showDesignerClothing);
   };
 
+  const fetchAgain = async () => {
+    const response = await axios.get(`/cloth/getAllCloth`);
+    setClothes(response.data.clothes);
+  };
+
   const handleAddGood = () => {
     openModal({
       component: AddGoodForm,
       props: {
         closeModal,
+        fetchAgain,
       },
       title: "Добавление товара",
     });
@@ -48,10 +54,18 @@ export const GoodsAdmin = () => {
       props: {
         closeModal,
         cloth,
+        fetchAgain,
       },
       title: "Изменение товара",
     });
   };
+
+  useEffect(() => {
+    (async function fetchCloth() {
+      const response = await axios.get(`/cloth/getAllCloth`);
+      setClothes(response.data.clothes);
+    })();
+  }, []);
 
   return (
     <Box display="flex" flexDirection="column" className="gap-4">
@@ -103,24 +117,32 @@ export const GoodsAdmin = () => {
         />
       </Box>
       <Box className="grid grid-cols-3 max-xl:grid-cols-2 max-lg:grid-cols-1 gap-4">
-        {goods.map((item, i) => {
-          if (
-            (showTshirts && item.category === "Футболки") ||
-            (showDesignerClothing && item.category === "Дизайнерская одежда")
-          ) {
-            return (
-              <Box
-                key={i}
-                className="hover:shadow hover:cursor-pointer"
-                onClick={() => handleEditCloth(item)}
-              >
-                <ItemCard name={item.name} pic={item.pic} price={item.price} />
-              </Box>
-            );
-          } else {
-            return null;
-          }
-        })}
+        {clothes ? (
+          clothes.map((item, i) => {
+            if (
+              (showTshirts && item.category === "Футболки") ||
+              (showDesignerClothing && item.category === "Дизайнерская одежда")
+            ) {
+              return (
+                <Box
+                  key={i}
+                  className="hover:shadow hover:cursor-pointer"
+                  onClick={() => handleEditCloth(item)}
+                >
+                  <ItemCard
+                    name={item.name}
+                    pictires={item.pictures}
+                    price={item.cost}
+                  />
+                </Box>
+              );
+            } else {
+              return null;
+            }
+          })
+        ) : (
+          <>Товары не найдены</>
+        )}
       </Box>
     </Box>
   );

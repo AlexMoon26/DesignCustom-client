@@ -2,7 +2,7 @@
 import { Box, Typography } from "@mui/material";
 import { useScreenWidth } from "../hooks/useScreenWidth";
 
-export const ItemCard = ({ name, price, pic }) => {
+export const ItemCard = ({ name, price, pictires }) => {
   const { isDesktop } = useScreenWidth();
   return (
     <div
@@ -13,7 +13,7 @@ export const ItemCard = ({ name, price, pic }) => {
         <img
           className="rounded-md"
           width={isDesktop ? "200" : "100"}
-          src={pic}
+          src={pictires}
           alt=""
         />
       </Box>

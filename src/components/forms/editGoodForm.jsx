@@ -27,7 +27,7 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-export const EditGoodForm = ({ closeModal, cloth }) => {
+export const EditGoodForm = ({ closeModal, cloth, fetchAgain }) => {
   const formik = useFormik({
     initialValues: {
       name: cloth.name,
@@ -46,12 +46,13 @@ export const EditGoodForm = ({ closeModal, cloth }) => {
     }),
     onSubmit: async (values) => {
       try {
-        const response = await axios.post(`/cloth/create`, values);
-        if (response.status !== 201) {
-          throw new Error("Ошибка создания товара");
+        const response = await axios.post(`/cloth/${cloth._id}`, values);
+        if (response.status !== 200) {
+          throw new Error("Ошибка изменения товара");
         }
-        toast.success("Товар успешно создан!");
+        toast.success("Товар успешно изменен!");
         closeModal();
+        fetchAgain();
       } catch (err) {
         toast.error(`${err}`);
       }
@@ -97,11 +98,9 @@ export const EditGoodForm = ({ closeModal, cloth }) => {
   return (
     <form onSubmit={formik.handleSubmit}>
       <Box className="flex flex-col gap-5 mt-3">
-        {/* {formik.values.pictures.map((imageUrl) => (
-          <Box key={imageUrl}>
-            <img src={imageUrl} alt="Выбранное изображение" />
-          </Box>
-        ))} */}
+        <Box>
+          <img src={cloth.pictures} alt="Выбранное изображение" />
+        </Box>
         <Button
           component="label"
           role={undefined}

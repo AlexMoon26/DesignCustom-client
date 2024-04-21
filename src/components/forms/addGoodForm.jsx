@@ -27,7 +27,7 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-export const AddGoodForm = ({ closeModal }) => {
+export const AddGoodForm = ({ closeModal, fetchAgain }) => {
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -52,6 +52,7 @@ export const AddGoodForm = ({ closeModal }) => {
         }
         toast.success("Товар успешно создан!");
         closeModal();
+        fetchAgain();
       } catch (err) {
         toast.error(`${err}`);
       }
