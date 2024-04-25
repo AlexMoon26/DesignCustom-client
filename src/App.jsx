@@ -19,8 +19,8 @@ function App() {
           <Route path="tshirts" element={<TshirtsPage />} />
           <Route path="basket" element={<BasketPage />} />
           <Route path="tshirts/:id" element={<SingleItemPage />} />
-          <Route path="designer-clothing" element={<DesignerClothing />} />
-          <Route path="designer-clothing/:id" element={<SingleItemPage />} />
+          <Route path="designer-clothes" element={<DesignerClothing />} />
+          <Route path="designer-clothes/:id" element={<SingleItemPage />} />
         </Route>
         <Route path="/admin" element={<LayoutAdmin />}>
           <Route index element={<HomeAdmin />} />

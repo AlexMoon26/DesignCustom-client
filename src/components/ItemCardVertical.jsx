@@ -4,12 +4,12 @@ import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const ItemCardVertical = ({ name, category, price, pic, id }) => {
+export const ItemCardVertical = ({ name, category, cost, pictures, _id }) => {
   const [likedItem, setLikedItem] = useState(false);
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/${category}/${id}`);
+    navigate(`/${category}/${_id}`);
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -22,13 +22,13 @@ export const ItemCardVertical = ({ name, category, price, pic, id }) => {
       role="list"
     >
       <Box className="items-center justify-center">
-        <img className="rounded-md" src={pic} alt="" />
+        <img className="rounded-md" src={pictures} alt="" />
       </Box>
 
       <Box>
         <Box className="flex flex-col">
           <Typography fontWeight="bold">{name}</Typography>
-          <Typography>{price} Р</Typography>
+          <Typography>{cost} Р</Typography>
           <Box className="flex justify-end">
             <IconButton
               onClick={(e) => {

@@ -8,12 +8,16 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
+  Checkbox,
+  Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import axios from "../../axios";
 import { toast } from "sonner";
+import { colors, sizes } from "../../data/data";
+import { Circle, CircleOutlined } from "@mui/icons-material";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -32,17 +36,22 @@ export const AddGoodForm = ({ closeModal, fetchAgain }) => {
     initialValues: {
       name: "",
       cost: 0,
+      outlay: 0,
       pictures: [],
       count: 0,
       description: "",
-      sizes: [""],
-      category: "Футболки",
+      sizes: [],
+      colors: [],
+      category: "tshirts",
     },
     validationSchema: Yup.object({
       name: Yup.string().required("Заполните название!"),
       cost: Yup.number()
         .required("Заполните стоимость!")
         .min(1, "Стоимость должна быть целым положительным числом!"),
+      outlay: Yup.number()
+        .required("Заполните себестоимость!")
+        .min(1, "Себестоимость должна быть целым положительным числом!"),
     }),
     onSubmit: async (values) => {
       try {
@@ -137,6 +146,16 @@ export const AddGoodForm = ({ closeModal, fetchAgain }) => {
           helperText={formik.errors.cost}
         />
         <TextField
+          label="Себестоимость"
+          id="outlay"
+          name="outlay"
+          placeholder="Себестоимость"
+          onChange={formik.handleChange}
+          value={formik.values.outlay}
+          error={!!formik.errors.outlay}
+          helperText={formik.errors.outlay}
+        />
+        <TextField
           label="Количество на складе"
           id="count"
           name="count"
@@ -146,6 +165,60 @@ export const AddGoodForm = ({ closeModal, fetchAgain }) => {
           error={!!formik.errors.count}
           helperText={formik.errors.count}
         />
+        <Box className="bg-slate-200 p-5">
+          <Typography>Выберите цвета:</Typography>
+          {colors.map((color, i) => (
+            <Checkbox
+              size="large"
+              key={i}
+              onChange={(e) => {
+                const updatedColors = [...formik.values.colors];
+                if (e.target.checked) {
+                  updatedColors.push(color);
+                } else {
+                  const index = updatedColors.indexOf(color);
+                  if (index > -1) {
+                    updatedColors.splice(index, 1);
+                  }
+                }
+                formik.setFieldValue("colors", updatedColors);
+              }}
+              icon={<CircleOutlined htmlColor={color} />}
+              checkedIcon={<Circle htmlColor={color} />}
+            />
+          ))}
+        </Box>
+        <Box className="bg-slate-200 p-5">
+          <Typography>Выберите размер:</Typography>
+          {sizes.map((size, i) => (
+            <Checkbox
+              size="large"
+              key={i}
+              onChange={(e) => {
+                const updatedSizes = [...formik.values.sizes];
+                if (e.target.checked) {
+                  updatedSizes.push(size);
+                } else {
+                  const index = updatedSizes.indexOf(size);
+                  if (index > -1) {
+                    updatedSizes.splice(index, 1);
+                  }
+                }
+                formik.setFieldValue("sizes", updatedSizes);
+              }}
+              icon={
+                <div className="size-10 flex justify-center items-center">
+                  {size}
+                </div>
+              }
+              checkedIcon={
+                <div className="size-10 bg-white rounded-full flex justify-center items-center">
+                  {size}
+                </div>
+              }
+            />
+          ))}
+        </Box>
         <FormControl>
           <InputLabel id="categoryLabel">Категория</InputLabel>
           <Select
@@ -157,12 +230,21 @@ export const AddGoodForm = ({ closeModal, fetchAgain }) => {
             value={formik.values.category}
             error={!!formik.errors.category}
           >
-            <MenuItem value={"Футболки"}>Футболки</MenuItem>
-            <MenuItem value={"Дизайнерская одежда"}>
-              Дизайнерская одежда
-            </MenuItem>
+            <MenuItem value={"tshirts"}>Футболки</MenuItem>
+            <MenuItem value={"designer-clothes"}>Дизайнерская одежда</MenuItem>
           </Select>
         </FormControl>
+        <TextField
+          label="Описание"
+          id="description"
+          name="description"
+          placeholder="Описание"
+          onChange={formik.handleChange}
+          value={formik.values.description}
+          error={!!formik.errors.description}
+          helperText={formik.errors.description}
+          multiline
+        />
         <Button type="submit">Создать</Button>
       </Box>
     </form>

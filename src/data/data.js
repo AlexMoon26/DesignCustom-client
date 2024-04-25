@@ -1,38 +1,3 @@
-export const orders = [
-  {
-    customerName: "Деды Эльдар",
-    email: "eldedy@mail.ru",
-    status: "Выполняется",
-    price: 3600,
-    date: "05.03.23",
-    phone: "8-800-800-88-88",
-  },
-  {
-    customerName: "Деды Эльдар",
-    email: "eldedy@mail.ru",
-    status: "В ожидании",
-    price: 3600,
-    date: "05.03.23",
-    phone: "8-800-800-88-88",
-  },
-  {
-    customerName: "Деды Эльдар",
-    email: "eldedy@mail.ru",
-    status: "В ожидании",
-    price: 3600,
-    date: "05.03.23",
-    phone: "8-800-800-88-88",
-  },
-  {
-    customerName: "Деды Эльдар",
-    email: "eldedy@mail.ru",
-    status: "Выполнен",
-    price: 3600,
-    date: "05.03.23",
-    phone: "8-800-800-88-88",
-  },
-];
-
 export const shirts = [
   "black-1.jpg",
   "black-2.jpg",
@@ -40,20 +5,23 @@ export const shirts = [
   "gray-2.jpg",
 ];
 
+export const colors = ["white", "black", "blue", "red"];
+export const sizes = ["S", "M", "L", "XL", "XXL"];
+
 export const goods = [
   {
     id: 1,
-    name: "Футболка черная с логотипом",
+    name: "Футболка белая",
     pictures: `http://res.cloudinary.com/dgfisnrrt/image/upload/v1713118537/tvfcmucaok4ijluvdtk9.jpg`,
     category: "Футболки",
-    price: 3600,
+    cost: 3600,
   },
   {
     id: 2,
-    name: "Футболка черная с надписью",
-    pictures: `/shirts/${shirts[1]}`,
+    name: "Футболка белая",
+    pictures: `http://res.cloudinary.com/dgfisnrrt/image/upload/v1713118537/tvfcmucaok4ijluvdtk9.jpg`,
     category: "Футболки",
-    price: 3600,
+    cost: 4600,
   },
   {
     id: 3,
@@ -69,6 +37,46 @@ export const goods = [
     cost: 3600,
     count: 20,
     category: "Дизайнерская одежда",
+  },
+];
+
+export const orders = [
+  {
+    _id: 1,
+    customerName: "Деды Эльдар",
+    email: "eldedy@mail.ru",
+    status: "Выполняется",
+    goods: [goods[0], goods[1]],
+    cost: 3600,
+    date: "05.03.23",
+    phone: "8-800-800-88-88",
+  },
+  {
+    _id: 2,
+    customerName: "Деды Эльдар",
+    email: "eldedy@mail.ru",
+    status: "В ожидании",
+    price: 3600,
+    date: "05.03.23",
+    phone: "8-800-800-88-88",
+  },
+  {
+    _id: 3,
+    customerName: "Деды Эльдар",
+    email: "eldedy@mail.ru",
+    status: "В ожидании",
+    price: 3600,
+    date: "05.03.23",
+    phone: "8-800-800-88-88",
+  },
+  {
+    _id: 4,
+    customerName: "Деды Эльдар",
+    email: "eldedy@mail.ru",
+    status: "Выполнен",
+    price: 3600,
+    date: "05.03.23",
+    phone: "8-800-800-88-88",
   },
 ];
 

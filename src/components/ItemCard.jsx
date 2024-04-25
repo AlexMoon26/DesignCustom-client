@@ -1,20 +1,41 @@
 /* eslint-disable react/prop-types */
 import { Box, Typography } from "@mui/material";
 import { useScreenWidth } from "../hooks/useScreenWidth";
+import { Checkbox } from "@mui/material";
+import { Circle } from "@mui/icons-material";
 
-export const ItemCard = ({ name, price, pictires }) => {
+export const ItemCard = ({
+  name,
+  cost,
+  colors,
+  pictures,
+  sizes,
+  selectedItems,
+  handleItemSelection,
+  itemId,
+}) => {
   const { isDesktop } = useScreenWidth();
   return (
     <div
-      className={`flex justify-between w-full text-xs md:text-sm xxl:text-lg rounded-l shadow p-5 rounded bg-white`}
+      className={`flex justify-between relative w-full text-xs md:text-sm xxl:text-lg rounded-l shadow p-5 rounded bg-white min-h-[300px]`}
       role="list"
     >
-      <Box className="items-center justify-center">
+      {itemId && (
+        <Checkbox
+          className="absolute w-2 h-2"
+          checked={selectedItems.includes(itemId)}
+          onChange={() => handleItemSelection(itemId)}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        />
+      )}
+      <Box className="flex items-center justify-center">
         <img
           className="rounded-md"
           width={isDesktop ? "200" : "100"}
-          src={pictires}
-          alt=""
+          src={pictures}
+          alt="Фото товара"
         />
       </Box>
 
@@ -29,9 +50,31 @@ export const ItemCard = ({ name, price, pictires }) => {
               {name}
             </Typography>
           </div>
+          {colors.length > 0 && (
+            <Box className="bg-slate-200 p-3">
+              <Typography>Цвета:</Typography>
+              {colors.map((color, i) => (
+                <Circle key={i} htmlColor={color} />
+              ))}
+            </Box>
+          )}
+          {sizes.length > 0 && (
+            <Box className="bg-slate-200 p-3">
+              <Typography>Размеры:</Typography>
+              <div className="flex gap-2">
+                {sizes.map((size, i) => (
+                  <div
+                    key={i}
+                    className="size-10 bg-white rounded-full flex justify-center items-center"
+                  >
+                    {size}
+                  </div>
+                ))}
+              </div>
+            </Box>
+          )}
           <div className="flex justify-end">
-            {" "}
-            <Typography className="truncate">{price} Р</Typography>
+            <Typography className="truncate">{cost} Р</Typography>
           </div>
         </div>
       </div>

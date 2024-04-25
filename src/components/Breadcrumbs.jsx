@@ -8,8 +8,8 @@ import { goods } from "../data/data";
 const breadcrumbNameMap = {
   "/": "Главная",
   "/tshirts": "Футболки",
-  "/designer-clothing": "Дизайнерская одежда",
-  "/basket": "Корзина"
+  "/designer-clothes": "Дизайнерская одежда",
+  "/basket": "Корзина",
 };
 
 const generateBreadcrumbs = ({ item }) => {
@@ -23,11 +23,7 @@ const generateBreadcrumbs = ({ item }) => {
     if (index === pathnames.length - 1) {
       let itemName = "";
       if (item) {
-        const itemId = parseInt(name, 10);
-        const foundItem = goods.find((good) => good.id === itemId);
-        if (foundItem) {
-          itemName = foundItem.name;
-        }
+        itemName = item[0].name;
       }
 
       return (

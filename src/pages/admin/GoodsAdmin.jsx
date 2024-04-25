@@ -2,10 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import {
   Box,
   Button,
-  Checkbox,
-  FormControlLabel,
   IconButton,
   InputAdornment,
+  MenuItem,
+  Select,
   TextField,
 } from "@mui/material";
 import { ItemCard } from "../../components/ItemCard";
@@ -15,22 +15,79 @@ import { ModalContext } from "../../components/modalContext";
 import { AddGoodForm } from "../../components/forms/addGoodForm";
 import { EditGoodForm } from "../../components/forms/editGoodForm";
 import axios from "../../axios";
+import { toast } from "sonner";
+
+const filterOptions = [
+  { value: "alphabetical", label: "По алфавиту" },
+  { value: "price", label: "По цене" },
+  { value: "tshirts", label: "Только футболки" },
+  { value: "designer-clothes", label: "Только дизайнерская одежда" },
+];
 
 export const GoodsAdmin = () => {
   const [clothes, setClothes] = useState(null);
   const { openModal, closeModal } = useContext(ModalContext);
   const { isDesktop } = useScreenWidth();
 
-  const [showTshirts, setShowTshirts] = useState(true);
-  const [showDesignerClothing, setShowDesignerClothing] = useState(true);
+  const [filterOption, setFilterOption] = useState("alphabetical");
+  const [selectedItems, setSelectedItems] = useState([]);
 
-  const handleTshirtsChange = () => {
-    setShowTshirts(!showTshirts);
+  const handleItemSelection = (itemId) => {
+    const newSelection = [...selectedItems];
+    const itemIndex = newSelection.indexOf(itemId);
+    if (itemIndex !== -1) {
+      newSelection.splice(itemIndex, 1);
+    } else {
+      newSelection.push(itemId);
+    }
+    setSelectedItems(newSelection);
   };
 
-  const handleDesignerClothingChange = () => {
-    setShowDesignerClothing(!showDesignerClothing);
+  const handleSelectAll = () => {
+    const allItemIds = clothes.map((item) => item._id);
+    setSelectedItems(
+      allItemIds.length === selectedItems.length ? [] : allItemIds
+    );
   };
+
+  const handleSelectDelete = async () => {
+    const response = await axios.post(`/cloth/delete`, {
+      ids: selectedItems,
+    });
+    if (response.status === 200) {
+      toast.success(response.data.message);
+    }
+    fetchAgain();
+    setSelectedItems([]);
+  };
+
+  const filteredClothes = clothes
+    ? clothes
+        .filter((item) => {
+          switch (filterOption) {
+            case "alphabetical":
+              return true;
+            case "price":
+              return true;
+            case "tshirts":
+              return item.category === "tshirts";
+            case "designer-clothes":
+              return item.category === "designer-clothes";
+            default:
+              return true;
+          }
+        })
+        .sort((a, b) => {
+          switch (filterOption) {
+            case "alphabetical":
+              return a.name.localeCompare(b.name);
+            case "price":
+              return a.cost - b.cost;
+            default:
+              return 0;
+          }
+        })
+    : [];
 
   const fetchAgain = async () => {
     const response = await axios.get(`/cloth/getAllCloth`);
@@ -70,8 +127,7 @@ export const GoodsAdmin = () => {
   return (
     <Box display="flex" flexDirection="column" className="gap-4">
       <Box
-        display="flex"
-        justifyContent="space-between"
+        className="flex justify-between items-center"
         flexDirection={!isDesktop && "column-reverse"}
       >
         <Box
@@ -81,7 +137,16 @@ export const GoodsAdmin = () => {
           <Button onClick={handleAddGood} fullWidth>
             Добавить
           </Button>
-          <Button fullWidth>Выбрать</Button>
+          <Button
+            fullWidth
+            disabled={selectedItems.length === 0}
+            onClick={handleSelectDelete}
+          >
+            Удалить выбранные ({selectedItems.length})
+          </Button>
+          <Button variant="outlined" onClick={handleSelectAll}>
+            Выбрать все
+          </Button>
         </Box>
         <TextField
           sx={isDesktop ? { width: "50%" } : {}}
@@ -98,46 +163,44 @@ export const GoodsAdmin = () => {
           }}
         />
       </Box>
-      <Box className="flex">
-        <FormControlLabel
-          control={
-            <Checkbox checked={showTshirts} onChange={handleTshirtsChange} />
-          }
-          label="Показать футболки"
-        />
-        <FormControlLabel
-          className="truncate"
-          control={
-            <Checkbox
-              checked={showDesignerClothing}
-              onChange={handleDesignerClothingChange}
-            />
-          }
-          label="Показать дизайн. одежду"
-        />
+      <Box className="flex mb-4">
+        <Select
+          value={filterOption}
+          onChange={(e) => setFilterOption(e.target.value)}
+          label="Сортировать по"
+        >
+          {filterOptions.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </Select>
       </Box>
       <Box className="grid grid-cols-3 max-xl:grid-cols-2 max-lg:grid-cols-1 gap-4">
         {clothes ? (
-          clothes.map((item, i) => {
-            if (
-              (showTshirts && item.category === "Футболки") ||
-              (showDesignerClothing && item.category === "Дизайнерская одежда")
-            ) {
+          filteredClothes.map((item, i) => {
+            {
               return (
-                <Box
-                  key={i}
-                  className="hover:shadow hover:cursor-pointer"
-                  onClick={() => handleEditCloth(item)}
-                >
-                  <ItemCard
-                    name={item.name}
-                    pictires={item.pictures}
-                    price={item.cost}
-                  />
-                </Box>
+                <div key={i}>
+                  {" "}
+                  <Box
+                    className="hover:shadow hover:cursor-pointer"
+                    onClick={() => handleEditCloth(item)}
+                  >
+                    <ItemCard
+                      key={i}
+                      itemId={item._id}
+                      sizes={item.sizes}
+                      selectedItems={selectedItems}
+                      name={item.name}
+                      pictures={item.pictures}
+                      cost={item.cost}
+                      colors={item.colors}
+                      handleItemSelection={handleItemSelection}
+                    />
+                  </Box>
+                </div>
               );
-            } else {
-              return null;
             }
           })
         ) : (

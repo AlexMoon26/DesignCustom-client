@@ -58,17 +58,7 @@ export const OrdersAdmin = () => {
             (showInactiveOrders && order.status === "В ожидании") ||
             (showCompletedOrders && order.status === "Выполнен")
           ) {
-            return (
-              <OrderCard
-                key={i}
-                clientName={order.customerName}
-                status={order.status}
-                date={order.date}
-                email={order.email}
-                phone={order.phone}
-                price={order.price}
-              />
-            );
+            return <OrderCard key={i} order={order} />;
           } else {
             return null;
           }

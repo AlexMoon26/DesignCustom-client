@@ -2,19 +2,13 @@
 import { Check, Close, MoreHoriz } from "@mui/icons-material";
 import { Box, IconButton, Menu, MenuItem, Typography } from "@mui/material";
 import dayjs from "dayjs";
-import { useState } from "react";
-import { ModalOrder } from "./Modals/ModalOrder";
+import { useContext, useState } from "react";
+import { ModalContext } from "./modalContext";
+import MoreInfoForm from "./forms/orders/moreInfoForm";
 
-export const OrderCard = ({
-  clientName,
-  status,
-  email,
-  date,
-  phone,
-  price,
-}) => {
-  const [moreDetailsModal, setMoreDetailsModal] = useState(false);
+export const OrderCard = ({ order }) => {
   const [options, setOptions] = useState(null);
+  const { openModal, closeModal } = useContext(ModalContext);
 
   const open = Boolean(options);
   const handleClick = (event) => {
@@ -24,9 +18,15 @@ export const OrderCard = ({
     setOptions(null);
   };
 
-  const handleModal = () => {
-    setMoreDetailsModal(!moreDetailsModal);
-    setOptions(null);
+  const handleOpenMoreInfo = (order) => {
+    openModal({
+      component: MoreInfoForm,
+      props: {
+        closeModal,
+        order,
+      },
+      title: `Заказ №${order._id}`,
+    });
   };
   return (
     <>
@@ -35,7 +35,7 @@ export const OrderCard = ({
         role="list"
       >
         <Box className="absolute -ml-10" top="40%" left={0}>
-          {status === "Выполнен" ? (
+          {order.status === "Выполнен" ? (
             <Check color="success" />
           ) : (
             <Close color="error" />
@@ -44,17 +44,17 @@ export const OrderCard = ({
         <ul className="w-full space-y-5 items-center justify-center">
           <li className="flex space-x-3 items-center">
             <Typography className=" font-normal truncate dark:text-gray-400">
-              {clientName}
+              {order.clientName}
             </Typography>
           </li>
           <li className="flex space-x-3 items-center">
             <Typography className=" font-normal truncate dark:text-gray-400 underline">
-              {email}
+              {order.email}
             </Typography>
           </li>
           <li className="flex space-x-3 items-center">
             <Typography className=" font-normal truncate dark:text-gray-400">
-              {phone}
+              {order.phone}
             </Typography>
           </li>
         </ul>
@@ -63,7 +63,7 @@ export const OrderCard = ({
           <div className="flex flex-col justify-between h-full">
             <Box className="flex justify-end" alignItems="center">
               <Typography className="font-normal text-gray-500 dark:text-gray-400">
-                {dayjs(date).format("DD.MM.YY")}
+                {dayjs(order.date).format("DD.MM.YY")}
               </Typography>
               <IconButton
                 variant="text"
@@ -112,18 +112,18 @@ export const OrderCard = ({
                 transformOrigin={{ horizontal: "right", vertical: "top" }}
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
               >
-                <MenuItem onClick={handleModal}>Подробнее</MenuItem>
+                <MenuItem onClick={() => handleOpenMoreInfo(order)}>
+                  Подробнее
+                </MenuItem>
               </Menu>
             </Box>
             <div className="flex justify-end">
               {" "}
-              <Typography fontSize={14}>{price} Р</Typography>
+              <Typography fontSize={14}>{order.cost} Р</Typography>
             </div>
           </div>
         </div>
       </div>
-
-      <ModalOrder open={moreDetailsModal} handleModal={handleModal} />
     </>
   );
 };
