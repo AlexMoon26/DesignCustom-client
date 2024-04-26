@@ -29,6 +29,8 @@ export const GoodsAdmin = () => {
   const { openModal, closeModal } = useContext(ModalContext);
   const { isDesktop } = useScreenWidth();
 
+  const [searchTerm, setSearchTerm] = useState("");
+
   const [filterOption, setFilterOption] = useState("alphabetical");
   const [selectedItems, setSelectedItems] = useState([]);
 
@@ -63,6 +65,13 @@ export const GoodsAdmin = () => {
 
   const filteredClothes = clothes
     ? clothes
+        .filter((item) => {
+          const searchTextLower = searchTerm.toLowerCase();
+          return (
+            item.name.toLowerCase().includes(searchTextLower) ||
+            item.description?.toLowerCase().includes(searchTextLower)
+          );
+        })
         .filter((item) => {
           switch (filterOption) {
             case "alphabetical":
@@ -152,6 +161,8 @@ export const GoodsAdmin = () => {
           sx={isDesktop ? { width: "50%" } : {}}
           fullWidth={!isDesktop}
           label="Поиск"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -178,31 +189,35 @@ export const GoodsAdmin = () => {
       </Box>
       <Box className="grid grid-cols-3 max-xl:grid-cols-2 max-lg:grid-cols-1 gap-4">
         {clothes ? (
-          filteredClothes.map((item, i) => {
-            {
-              return (
-                <div key={i}>
-                  {" "}
-                  <Box
-                    className="hover:shadow hover:cursor-pointer"
-                    onClick={() => handleEditCloth(item)}
-                  >
-                    <ItemCard
-                      key={i}
-                      itemId={item._id}
-                      sizes={item.sizes}
-                      selectedItems={selectedItems}
-                      name={item.name}
-                      pictures={item.pictures}
-                      cost={item.cost}
-                      colors={item.colors}
-                      handleItemSelection={handleItemSelection}
-                    />
-                  </Box>
-                </div>
-              );
-            }
-          })
+          filteredClothes.length > 0 ? (
+            filteredClothes.map((item, i) => {
+              {
+                return (
+                  <div key={i}>
+                    {" "}
+                    <Box
+                      className="hover:shadow hover:cursor-pointer"
+                      onClick={() => handleEditCloth(item)}
+                    >
+                      <ItemCard
+                        key={i}
+                        itemId={item._id}
+                        sizes={item.sizes}
+                        selectedItems={selectedItems}
+                        name={item.name}
+                        pictures={item.pictures}
+                        cost={item.cost}
+                        colors={item.colors}
+                        handleItemSelection={handleItemSelection}
+                      />
+                    </Box>
+                  </div>
+                );
+              }
+            })
+          ) : (
+            "Товары не найдены"
+          )
         ) : (
           <>Товары не найдены</>
         )}

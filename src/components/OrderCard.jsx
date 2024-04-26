@@ -35,7 +35,7 @@ export const OrderCard = ({ order }) => {
         role="list"
       >
         <Box className="absolute -ml-10" top="40%" left={0}>
-          {order.status === "Выполнен" ? (
+          {order.status === "fulfilled" ? (
             <Check color="success" />
           ) : (
             <Close color="error" />

@@ -1,68 +1,87 @@
+import { Box, Button, Select, MenuItem, Card } from "@mui/material";
 import { useState } from "react";
-import { Box, Checkbox, FormControlLabel } from "@mui/material";
-import { orders } from "../../data/data";
+import { orders } from "../../data/data"; // Assuming 'orders' is an array of order objects
 import { OrderCard } from "../../components/OrderCard";
 
+const filterOptions = [
+  { value: "all", label: "Все" },
+  { value: "fulfilled", label: "Выполненные" },
+  { value: "unfulfilled", label: "Невыполненные" },
+  { value: "dateAsc", label: "По дате" },
+  { value: "nameAsc", label: "По алфавиту" },
+];
+
 export const OrdersAdmin = () => {
-  // Состояния для отслеживания выбранных опций сортировки
-  const [showActiveOrders, setShowActiveOrders] = useState(true);
-  const [showInactiveOrders, setShowInactiveOrders] = useState(true);
-  const [showCompletedOrders, setShowCompletedOrders] = useState(true);
+  const [filteredOrders, setFilteredOrders] = useState(orders);
+  const [filterOption, setFilterOption] = useState("all");
 
-  // Функции для обработки изменений состояния чекбоксов
-  const handleActiveOrdersChange = () => {
-    setShowActiveOrders(!showActiveOrders);
+  const handleCreateOrder = () => {
+    console.log("Create Order button clicked");
   };
 
-  const handleInactiveOrdersChange = () => {
-    setShowInactiveOrders(!showInactiveOrders);
-  };
+  const handleFilterChange = (e) => {
+    const selectedOption = e.target.value;
+    setFilterOption(selectedOption);
 
-  const handleCompletedOrdersChange = () => {
-    setShowCompletedOrders(!showCompletedOrders);
+    if (selectedOption === "all") {
+      setFilteredOrders(orders);
+      return;
+    }
+
+    const filteredData = orders
+      .filter((order) => {
+        switch (selectedOption) {
+          case "fulfilled":
+            return order.status === "fulfilled";
+          case "unfulfilled":
+            return order.status === "unfulfilled";
+          case "nameAsc":
+            return orders.sort((a, b) =>
+              a.customerName.localeCompare(b.customerName)
+            )[0];
+          default:
+            return true;
+        }
+      })
+      .sort((a, b) => {
+        switch (selectedOption) {
+          case "dateAsc":
+            return new Date(a.date) - new Date(b.date);
+        }
+      });
+    setFilteredOrders(filteredData);
   };
 
   return (
-    <Box>
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={showActiveOrders}
-            onChange={handleActiveOrdersChange}
-          />
-        }
-        label="Показать активные заказы"
-      />
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={showInactiveOrders}
-            onChange={handleInactiveOrdersChange}
-          />
-        }
-        label="Показать неактивные заказы"
-      />
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={showCompletedOrders}
-            onChange={handleCompletedOrdersChange}
-          />
-        }
-        label="Показать выполненные заказы"
-      />
-      <Box className="grid grid-cols-2 max-lg:grid-cols-1 gap-4">
-        {orders.map((order, i) => {
-          if (
-            (showActiveOrders && order.status === "Выполняется") ||
-            (showInactiveOrders && order.status === "В ожидании") ||
-            (showCompletedOrders && order.status === "Выполнен")
-          ) {
-            return <OrderCard key={i} order={order} />;
-          } else {
-            return null;
-          }
-        })}
+    <Box className="flex max-lg:flex-col justify-between gap-4 w-full">
+      <Box>
+        <Box className="flex justify-between items-center mb-4">
+          <Button onClick={handleCreateOrder}>Создать заказ</Button>
+          <Select value={filterOption} onChange={handleFilterChange}>
+            {filterOptions.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </Box>
+        <Box className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+          {filteredOrders.map((order, i) => (
+            <OrderCard key={i} order={order} />
+          ))}
+        </Box>
+      </Box>
+      <Box className="flex flex-col xl:w-1/2 gap-4">
+        <Box className="flex justify-center items-centerz bg-white h-[343px] shadow-md p-5 w-full rounded-md">
+          Создать заказ
+        </Box>
+        <Box className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+          {orders
+            .filter((item) => item.status === "unfulfilled")
+            .map((order, i) => (
+              <OrderCard key={i} order={order} />
+            ))}
+        </Box>
       </Box>
     </Box>
   );

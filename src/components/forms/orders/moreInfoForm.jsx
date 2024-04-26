@@ -4,6 +4,7 @@ import { ItemCard } from "../../ItemCard";
 import dayjs from "dayjs";
 
 export default function MoreInfoForm({ closeModal, order }) {
+  console.log(order);
   return (
     <form>
       <Box

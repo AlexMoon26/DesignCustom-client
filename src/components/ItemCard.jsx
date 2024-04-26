@@ -50,7 +50,7 @@ export const ItemCard = ({
               {name}
             </Typography>
           </div>
-          {colors.length > 0 && (
+          {colors && colors.length > 0 && (
             <Box className="bg-slate-200 p-3">
               <Typography>Цвета:</Typography>
               {colors.map((color, i) => (
@@ -58,7 +58,7 @@ export const ItemCard = ({
               ))}
             </Box>
           )}
-          {sizes.length > 0 && (
+          {sizes && sizes.length > 0 && (
             <Box className="bg-slate-200 p-3">
               <Typography>Размеры:</Typography>
               <div className="flex gap-2">
