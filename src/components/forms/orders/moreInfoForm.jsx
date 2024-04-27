@@ -41,10 +41,15 @@ export default function MoreInfoForm({ closeModal, order }) {
             />
           ))}
         </Box>
-        <Box className="flex justify-between px-5">
+        <Box className="flex flex-col justify-between px-5">
           <Typography>
             {`Общая прибыль: ${order.goods
               .map((item) => item.cost)
+              .reduce((acc, item) => acc + item, 0)} руб.`}
+          </Typography>
+          <Typography>
+            {`Общая себестоимость: ${order.goods
+              .map((item) => item.outlay)
               .reduce((acc, item) => acc + item, 0)} руб.`}
           </Typography>
         </Box>

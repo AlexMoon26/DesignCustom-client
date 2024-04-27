@@ -44,7 +44,7 @@ export const OrderCard = ({ order }) => {
         <ul className="w-full space-y-5 items-center justify-center">
           <li className="flex space-x-3 items-center">
             <Typography className=" font-normal truncate dark:text-gray-400">
-              {order.clientName}
+              {order.customerName}
             </Typography>
           </li>
           <li className="flex space-x-3 items-center">
@@ -119,7 +119,12 @@ export const OrderCard = ({ order }) => {
             </Box>
             <div className="flex justify-end">
               {" "}
-              <Typography fontSize={14}>{order.cost} Р</Typography>
+              <Typography
+                className="font-normal truncate dark:text-gray-400"
+                fontSize={20}
+              >
+                {order.cost} Р
+              </Typography>
             </div>
           </div>
         </div>
