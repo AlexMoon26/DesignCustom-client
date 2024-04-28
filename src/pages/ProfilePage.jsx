@@ -10,7 +10,7 @@ export function ProfilePage() {
         Мой аккаунт
       </Typography>
       <Box className="flex max-md:flex-col">
-        <Box className="flex flex-col w-1/2 gap-5 p-5">
+        <Box className="flex flex-col md:w-1/2 gap-5 p-5">
           <Box className="flex w-full justify-between">
             <Box className="size-28 bg-gray-500 rounded-md" />
             <Box className="flex flex-col justify-between">
@@ -32,7 +32,7 @@ export function ProfilePage() {
             </Button>
           </Box>
         </Box>
-        <Box className="w-1/2">
+        <Box className="md:w-1/2">
           <Outlet />
         </Box>
       </Box>
