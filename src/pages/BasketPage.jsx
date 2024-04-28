@@ -1,12 +1,11 @@
 import { Box, Button, Typography } from "@mui/material";
 import { BreadCrumbs } from "../components/Breadcrumbs";
 import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import AppContext, { AppState } from "../Context/AppProvider";
+import { AppState } from "../Context/AppProvider";
 
 export const BasketPage = () => {
-  const [basketData, setBasketData] = useState([]);
   const { user } = AppState();
   return (
     <Box sx={{ px: { xs: 2, lg: 10 } }}>

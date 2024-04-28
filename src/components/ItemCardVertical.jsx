@@ -4,8 +4,15 @@ import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const ItemCardVertical = ({ name, category, cost, pictures, _id }) => {
-  const [likedItem, setLikedItem] = useState(false);
+export const ItemCardVertical = ({
+  name,
+  category,
+  cost,
+  pictures,
+  _id,
+  liked = false,
+}) => {
+  const [likedItem, setLikedItem] = useState(liked);
   const navigate = useNavigate();
 
   const handleClick = () => {
