@@ -10,6 +10,7 @@ const breadcrumbNameMap = {
   "/tshirts": "Футболки",
   "/designer-clothes": "Дизайнерская одежда",
   "/basket": "Корзина",
+  "/profile": "Профиль",
 };
 
 const generateBreadcrumbs = ({ item }) => {

@@ -17,28 +17,7 @@ const options = {
   maintainAspectRatio: false,
 };
 
-function App({ backgroundColor }) {
-  const data = {
-    labels: [""],
-    datasets: [
-      {
-        label: "Заказы",
-        data: [faker.datatype.number({ min: 1, max: 1000 })],
-        backgroundColor: ["rgba(255, 99, 132, 0.5)"],
-      },
-      {
-        label: "Клиенты",
-        data: [faker.datatype.number({ min: 1, max: 1000 })],
-        backgroundColor: [backgroundColor],
-      },
-      {
-        label: "Продажи",
-        data: [faker.datatype.number({ min: 1, max: 1000 })],
-        backgroundColor: ["rgba(255, 99, 132, 0.5)"],
-      },
-    ],
-  };
-
+function App({ backgroundColor, data }) {
   return (
     <Box className="flex flex-col justify-end">
       <Bar options={options} data={data} />

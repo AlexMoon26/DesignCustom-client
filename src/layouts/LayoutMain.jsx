@@ -5,7 +5,7 @@ import { Box } from "@mui/material";
 
 export const LayoutMain = () => {
   return (
-    <Box minHeight={"100vh"} className="">
+    <Box minHeight={"100vh"}>
       <Header />
       <Box className={`pt-20 min-h-[75vh]`}>
         <Outlet />
