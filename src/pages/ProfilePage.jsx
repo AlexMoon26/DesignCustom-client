@@ -9,8 +9,8 @@ export function ProfilePage() {
       <Typography fontSize={30} align="center">
         Мой аккаунт
       </Typography>
-      <Box className="flex max-md:flex-col">
-        <Box className="flex flex-col md:w-1/2 gap-5 p-5">
+      <Box className="flex max-md:flex-col justify-between">
+        <Box className="flex flex-col  w-1/3  gap-5 p-5">
           <Box className="flex w-full justify-between">
             <Box className="size-28 bg-gray-500 rounded-md" />
             <Box className="flex flex-col justify-between">

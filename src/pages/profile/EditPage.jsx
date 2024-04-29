@@ -27,7 +27,7 @@ export default function EditPage() {
       </FormControl>
       <Box className="flex justify-between">
         <Button>Сохранить изменения</Button>
-        <Button>Сохранить изменения</Button>
+        <Button>Изменить пароль</Button>
       </Box>
     </form>
   );
