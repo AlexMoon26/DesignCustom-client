@@ -14,16 +14,20 @@ export default function MoreInfoForm({ closeModal, order }) {
       >
         <Box className="flex flex-col">
           <Box className="flex justify-between gap-4">
-            <Input value="Россия" disabled />
-            <Input value={dayjs(Date.now()).format("DD.MM.YYYY")} disabled />
+            <Input value="Россия" disabled fullWidth />
+            <Input
+              value={dayjs(Date.now()).format("DD.MM.YYYY")}
+              disabled
+              fullWidth
+            />
           </Box>
           <Box className="flex justify-between gap-4">
-            <Input placeholder="Имя" />
-            <Input placeholder="Фамилия" />
+            <Input placeholder="Имя" fullWidth />
+            <Input placeholder="Фамилия" fullWidth />
           </Box>
           <Box className="flex justify-between gap-4">
-            <Input placeholder="Почта" />
-            <Input placeholder="Телефон" />
+            <Input placeholder="Почта" fullWidth />
+            <Input placeholder="Телефон" fullWidth />
           </Box>
           <Input placeholder="Населенный пункт (область)" />
           <Input placeholder="Город" />

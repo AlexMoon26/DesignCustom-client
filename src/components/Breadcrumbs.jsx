@@ -3,7 +3,6 @@
 import { Link, useLocation } from "react-router-dom";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Typography from "@mui/material/Typography";
-import { goods } from "../data/data";
 
 const breadcrumbNameMap = {
   "/": "Главная",
