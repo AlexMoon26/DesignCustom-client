@@ -1,34 +1,14 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  FormGroup,
-  TextField,
-} from "@mui/material";
-import React from "react";
+import axios from "../../axios";
+import { useEffect, useState } from "react";
+import EditProfileForm from "../../components/forms/profile/editProfileForm";
 
 export default function EditPage() {
-  return (
-    <form className="flex flex-col gap-5">
-      <FormControl component="fieldset">
-        <FormGroup aria-label="position" className="gap-5">
-          <TextField label="Имя" />
-          <TextField label="Фамилия" />
-          <TextField label="Email" />
-          <TextField label="Номер телефона" />
-          <FormControlLabel
-            value="Добавить двойную защиту"
-            control={<Checkbox />}
-            label="Добавить двойную защиту"
-          />
-        </FormGroup>
-      </FormControl>
-      <Box className="flex justify-between">
-        <Button>Сохранить изменения</Button>
-        <Button>Изменить пароль</Button>
-      </Box>
-    </form>
-  );
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    (async () => {
+      const response = await axios.get("/auth/me");
+      setUser(response.data.user);
+    })();
+  }, []);
+  return user && <EditProfileForm user={user ? user : []} />;
 }
