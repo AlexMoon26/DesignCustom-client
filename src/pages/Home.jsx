@@ -3,13 +3,23 @@ import { ItemCardVertical } from "../components/ItemCardVertical";
 import { SlideBar } from "../components/SlideBar";
 import { useEffect, useRef, useState } from "react";
 import axios from "../axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import AppContext, { AppState } from "../Context/AppProvider";
 
 export const Home = () => {
   const [goods, setGoods] = useState();
+  const { setUser } = AppState();
+  const router = useNavigate();
 
   const location = useLocation();
   const targetElementRef = useRef(null);
+
+  const handleFetchAgain = async () => {
+    const fetchUser = await axios.get("/auth/me");
+    localStorage.setItem("userInfo", JSON.stringify(fetchUser.data.user));
+    setUser(fetchUser.data.user);
+    router("/");
+  };
 
   useEffect(() => {
     if (
@@ -50,6 +60,7 @@ export const Home = () => {
                 name={item.name}
                 pictures={item.pictures}
                 cost={item.cost}
+                handleFetchAgain={handleFetchAgain}
               />
             ))}
         </Box>

@@ -16,15 +16,18 @@ import {
 } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ModalRegister } from "../components/Modals/ModalRegister.jsx";
-import { LogOut } from "../Context/AppProvider.jsx";
+import { AppState, LogOut } from "../Context/AppProvider.jsx";
 
 export const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const isAuth = localStorage.getItem("token");
   const [isOpenModalAuth, setIsOpenModalAuth] = useState(false);
+
+  const { user } = AppState() || {};
+  const likedClothCount = user?.likedClothes ? user?.likedClothes?.length : 0;
 
   const router = useNavigate();
 
@@ -117,13 +120,15 @@ export const Header = () => {
         </IconButton>
         <p>Профиль</p>
       </MenuItem>
-      <MenuItem>
+      <MenuItem
+        onClick={() => (router("/profile/favorite"), handleMenuClose())}
+      >
         <IconButton
           size="large"
           aria-label="show 17 new notifications"
           color="inherit"
         >
-          <Badge badgeContent={100} color="error">
+          <Badge badgeContent={likedClothCount} color="error">
             <Favorite />
           </Badge>
         </IconButton>
@@ -183,11 +188,12 @@ export const Header = () => {
             <>
               <Box sx={{ display: { xs: "none", md: "flex" } }}>
                 <IconButton
+                  onClick={() => router("/profile/favorite")}
                   size="large"
                   aria-label="show 17 new notifications"
                   color="inherit"
                 >
-                  <Badge badgeContent={100} color="error">
+                  <Badge badgeContent={likedClothCount} color="error">
                     <Favorite />
                   </Badge>
                 </IconButton>

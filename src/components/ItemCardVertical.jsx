@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
 import { Box, IconButton, Typography } from "@mui/material";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "../axios";
+import { toast } from "sonner";
 
 export const ItemCardVertical = ({
   name,
@@ -11,8 +13,10 @@ export const ItemCardVertical = ({
   pictures,
   _id,
   liked = false,
+  handleFetchAgain,
 }) => {
   const [likedItem, setLikedItem] = useState(liked);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -22,6 +26,31 @@ export const ItemCardVertical = ({
       behavior: "smooth",
     });
   };
+
+  const handleLike = async () => {
+    try {
+      const response = await axios.get(`/cloth/${_id}/like`);
+      if (!response) throw new Error("Ошибка взаимодействия с товаром");
+      setLikedItem(!likedItem);
+      toast.success(response.data);
+      handleFetchAgain && handleFetchAgain();
+    } catch (err) {
+      toast.error(`${err}`);
+    }
+  };
+
+  useEffect(() => {
+    (async () => {
+      const response = await axios.get("/auth/me");
+      setUser(response.data.user);
+    })();
+  }, []);
+
+  useEffect(() => {
+    if (user && user.likedClothes) {
+      setLikedItem(user.likedClothes.includes(_id));
+    }
+  }, [user, _id]);
   return (
     <Box
       onClick={() => handleClick()}
@@ -40,7 +69,7 @@ export const ItemCardVertical = ({
             <IconButton
               onClick={(e) => {
                 e.stopPropagation();
-                setLikedItem(!likedItem);
+                handleLike();
               }}
               size="large"
               aria-label="account of current user"
