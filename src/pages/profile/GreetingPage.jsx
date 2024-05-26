@@ -1,6 +1,6 @@
 import { Button, Typography } from "@mui/material";
 import React from "react";
-import { LogOut } from "../../Context/AppProvider";
+import { AppState, LogOut } from "../../Context/AppProvider";
 import { useNavigate } from "react-router-dom";
 
 function GreetingPage() {
@@ -10,10 +10,11 @@ function GreetingPage() {
     localStorage.removeItem("userInfo");
     router("/");
   };
+  const { user } = AppState();
   return (
     <div>
       <Typography>
-        Добро пожаловать, Эльдар (не Эльдар?{" "}
+        Добро пожаловать, {user.firstName} (не {user.firstName}?{" "}
         <Button variant="text" onClick={handleLogOut}>
           <LogOut />
         </Button>

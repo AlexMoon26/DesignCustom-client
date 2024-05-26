@@ -5,16 +5,21 @@ import { Link } from "react-router-dom";
 import { AppState } from "../Context/AppProvider";
 import { useEffect, useState } from "react";
 import axios from "../axios";
-import { ItemCardVertical } from "../components/ItemCardVertical";
 import { useScreenWidth } from "../hooks/useScreenWidth";
 import { Circle, Delete } from "@mui/icons-material";
 import { toast } from "sonner";
 
 export const BasketPage = () => {
-  const { user } = AppState();
+  const { user, setUser } = AppState();
   const [items, setItems] = useState(null);
   const [totalCost, setTotalCost] = useState(0);
   const { isDesktop } = useScreenWidth();
+
+  const handleFetchAgain = async () => {
+    const fetchUser = await axios.get("/auth/me");
+    localStorage.setItem("userInfo", JSON.stringify(fetchUser.data.user));
+    setUser(fetchUser.data.user);
+  };
 
   const handleDeleteItemFromCart = async (_id) => {
     const response = await axios.delete(`/user/cart/${_id}`);
@@ -22,6 +27,16 @@ export const BasketPage = () => {
     if (response.data) {
       setItems(response.data);
       toast.success("Товар успешно удален с корзины");
+      handleFetchAgain();
+    }
+  };
+
+  const handleCreateOrder = async () => {
+    const response = await axios.post("/orders/create");
+    if (response.status === 201) {
+      handleFetchAgain();
+      setItems(null);
+      toast.success("Заказ успешно сформирован");
     }
   };
 
@@ -121,7 +136,7 @@ export const BasketPage = () => {
               <Typography textAlign="center" fontSize={24} mt={4}>
                 Общая стоимость: {totalCost} Р
               </Typography>
-              <Button>Купить</Button>
+              <Button onClick={handleCreateOrder}>Купить</Button>
             </>
           ) : (
             <Box className="flex flex-col items-center justify-center gap-4">

@@ -18,11 +18,19 @@ import { useFormik } from "formik";
 import Sizes from "../components/clothes/sizes";
 import { toast } from "sonner";
 import * as Yup from "yup";
+import { AppState } from "../Context/AppProvider";
 
 export const SingleItemPage = () => {
   const { id } = useParams();
   const [goods, setGoods] = useState();
   const [isSizes, setIsSizes] = useState(false);
+  const { setUser } = AppState();
+
+  const handleFetchAgain = async () => {
+    const fetchUser = await axios.get("/auth/me");
+    localStorage.setItem("userInfo", JSON.stringify(fetchUser.data.user));
+    setUser(fetchUser.data.user);
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -40,6 +48,7 @@ export const SingleItemPage = () => {
           throw new Error("Ошибка добавления товара в корзину");
         }
         toast.success("Товар успешно добавлен в корзину");
+        handleFetchAgain();
       } catch (err) {
         toast.error(`${err}`);
       }

@@ -28,6 +28,7 @@ export const Header = () => {
 
   const { user } = AppState() || {};
   const likedClothCount = user?.likedClothes ? user?.likedClothes?.length : 0;
+  const CartClothCount = user?.cart ? user?.cart?.length : 0;
 
   const router = useNavigate();
 
@@ -136,7 +137,7 @@ export const Header = () => {
       </MenuItem>
       <MenuItem onClick={() => (router("/basket"), handleMenuClose())}>
         <IconButton size="large" aria-label="cart" color="inherit">
-          <Badge badgeContent={2} color="error">
+          <Badge badgeContent={CartClothCount} color="error">
             <ShoppingCart />
           </Badge>
         </IconButton>
@@ -203,7 +204,7 @@ export const Header = () => {
                   aria-label="show 17 new notifications"
                   color="inherit"
                 >
-                  <Badge badgeContent={2} color="error">
+                  <Badge badgeContent={CartClothCount} color="error">
                     <ShoppingCart />
                   </Badge>
                 </IconButton>
