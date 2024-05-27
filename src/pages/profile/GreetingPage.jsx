@@ -14,12 +14,9 @@ function GreetingPage() {
   return (
     <div>
       <Typography>
-        Добро пожаловать, {user.firstName} (не {user.firstName}?{" "}
-        <Button variant="text" onClick={handleLogOut}>
-          <LogOut />
-        </Button>
-        )
+        Добро пожаловать, {user?.firstName} (не {user?.firstName}? )
       </Typography>
+      <LogOut />
       <Typography>
         Из главной страницы аккаунта вы можете посмотреть ваши{" "}
         <span

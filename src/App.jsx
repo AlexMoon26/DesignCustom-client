@@ -22,7 +22,6 @@ function App() {
       <Routes>
         <Route path="/" element={<LayoutMain />}>
           <Route index element={<Home />} />
-          <Route path="tshirts" element={<TshirtsPage />} />
           <Route path="basket" element={<BasketPage />} />
           <Route path="/profile" element={<ProfilePage />}>
             <Route index element={<GreetingPage />} />
@@ -31,6 +30,7 @@ function App() {
             <Route path="address" element={<AddressPage />} />
             <Route path="edit" element={<EditPage />} />
           </Route>
+          <Route path="tshirts" element={<TshirtsPage />} />
           <Route path="tshirts/:id" element={<SingleItemPage />} />
           <Route path="designer-clothes" element={<DesignerClothing />} />
           <Route path="designer-clothes/:id" element={<SingleItemPage />} />

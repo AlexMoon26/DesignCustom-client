@@ -25,7 +25,7 @@ export const OrderCard = ({ order }) => {
         closeModal,
         order,
       },
-      title: `Заказ №${order._id}`,
+      title: `Заказ № ${order._id}`,
     });
   };
   return (
@@ -44,17 +44,17 @@ export const OrderCard = ({ order }) => {
         <ul className="w-full space-y-5 items-center justify-center">
           <li className="flex space-x-3 items-center">
             <Typography className=" font-normal truncate dark:text-gray-400">
-              {order.customerName}
+              {order.user.firstName}
             </Typography>
           </li>
           <li className="flex space-x-3 items-center">
             <Typography className=" font-normal truncate dark:text-gray-400 underline">
-              {order.email}
+              {order.user.email}
             </Typography>
           </li>
           <li className="flex space-x-3 items-center">
             <Typography className=" font-normal truncate dark:text-gray-400">
-              {order.phone}
+              {order.user.phone}
             </Typography>
           </li>
         </ul>
@@ -63,7 +63,7 @@ export const OrderCard = ({ order }) => {
           <div className="flex flex-col justify-between h-full">
             <Box className="flex justify-end" alignItems="center">
               <Typography className="font-normal text-gray-500 dark:text-gray-400">
-                {dayjs(order.date).format("DD.MM.YY")}
+                {dayjs(order.createdAt).format("DD.MM.YY")}
               </Typography>
               <IconButton
                 variant="text"
@@ -123,7 +123,7 @@ export const OrderCard = ({ order }) => {
                 className="font-normal truncate dark:text-gray-400"
                 fontSize={20}
               >
-                {order.cost} Р
+                {order.totalPrice} Р
               </Typography>
             </div>
           </div>

@@ -9,8 +9,7 @@ export function OrdersPage() {
 
   useEffect(() => {
     (async () => {
-      const response = await axios.get("/orders");
-      console.log(response.data);
+      const response = await axios.get("/user/orders");
       setOrders(response.data);
     })();
   }, []);
@@ -29,8 +28,8 @@ export function OrdersPage() {
               <Card className="flex flex-col p-5">
                 <Typography color="gray">Товары:</Typography>
                 <Box className="flex flex-col justify-between">
-                  {order.items.map((item) => (
-                    <Box className="flex justify-between">
+                  {order.items.map((item, i) => (
+                    <Box key={i} className="flex justify-between">
                       <Typography>{item.cloth.name}</Typography>
                       <Typography>{item.cloth.cost} р</Typography>
                     </Box>

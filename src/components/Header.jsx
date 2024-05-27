@@ -87,7 +87,7 @@ export const Header = () => {
           localStorage.removeItem("userInfo");
         }}
       >
-        <LogOut />
+        Выйти
       </MenuItem>
     </Menu>
   );
