@@ -16,8 +16,8 @@ export function ProfilePage() {
         <Box className="flex flex-col  w-1/3  gap-5 p-5">
           <Box className="flex w-full justify-between">
             <Box className="flex flex-col justify-between">
-              <Typography>{user.firstName}</Typography>
-              <Typography>{user.email}</Typography>
+              <Typography>{user?.firstName}</Typography>
+              <Typography>{user?.email}</Typography>
               <Button className="w-28">Выйти</Button>
             </Box>
           </Box>

@@ -8,9 +8,9 @@ import {
   IconButton,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { useState } from "react";
-import { orders } from "../../data/data";
+import { useEffect, useState } from "react";
 import { OrderCard } from "../../components/OrderCard";
+import axios from "../../axios";
 
 const filterOptions = [
   { value: "all", label: "Все" },
@@ -21,6 +21,7 @@ const filterOptions = [
 ];
 
 export const OrdersAdmin = () => {
+  const [orders, setOrders] = useState(null);
   const [filterOption, setFilterOption] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -28,31 +29,40 @@ export const OrdersAdmin = () => {
     console.log("Create Order button clicked");
   };
 
-  const filteredData = orders
-    .filter((order) => {
-      const searchTextLower = searchTerm.toLowerCase();
-      return order.customerName.toLowerCase().includes(searchTextLower);
-    })
-    .filter((order) => {
-      switch (filterOption) {
-        case "fulfilled":
-          return order.status === "fulfilled";
-        case "unfulfilled":
-          return order.status === "unfulfilled";
-        case "nameAsc":
-          return orders.sort((a, b) =>
-            a.customerName.localeCompare(b.customerName)
-          )[0];
-        default:
-          return true;
-      }
-    })
-    .sort((a, b) => {
-      switch (filterOption) {
-        case "dateAsc":
-          return new Date(a.date) - new Date(b.date);
-      }
-    });
+  const filteredData =
+    orders &&
+    orders
+      .filter((order) => {
+        const searchTextLower = searchTerm.toLowerCase();
+        return order.user.firstName.toLowerCase().includes(searchTextLower);
+      })
+      .filter((order) => {
+        switch (filterOption) {
+          case "fulfilled":
+            return order.status === "fulfilled";
+          case "unfulfilled":
+            return order.status === "unfulfilled";
+          case "nameAsc":
+            return orders.sort((a, b) =>
+              a.customerName.localeCompare(b.customerName)
+            )[0];
+          default:
+            return true;
+        }
+      })
+      .sort((a, b) => {
+        switch (filterOption) {
+          case "dateAsc":
+            return new Date(a.date) - new Date(b.date);
+        }
+      });
+
+  useEffect(() => {
+    (async () => {
+      const response = await axios.get("/orders");
+      setOrders(response.data);
+    })();
+  }, []);
 
   return (
     <Box className="flex max-lg:flex-col justify-between gap-4 w-full">
@@ -91,7 +101,7 @@ export const OrdersAdmin = () => {
           </Button>
         </Box>
         <Box className="grid grid-cols-1 gap-4">
-          {filteredData.length > 0
+          {orders && filteredData?.length > 0
             ? filteredData.map((order, i) => (
                 <OrderCard key={i} order={order} />
               ))
@@ -100,11 +110,10 @@ export const OrdersAdmin = () => {
       </Box>
       <Box className="flex flex-col xl:w-1/2 gap-4">
         <Box className="grid grid-cols-1 gap-4">
-          {orders
-            .filter((item) => item.status === "unfulfilled")
-            .map((order, i) => (
-              <OrderCard key={i} order={order} />
-            ))}
+          {orders &&
+            orders
+              .filter((item) => item.status === "unfulfilled")
+              .map((order, i) => <OrderCard key={i} order={order} />)}
         </Box>
       </Box>
     </Box>

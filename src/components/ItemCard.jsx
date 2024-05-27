@@ -50,17 +50,21 @@ export const ItemCard = ({
               {name}
             </Typography>
           </div>
-          {colors && colors.length > 0 && (
-            <Box className="bg-slate-200 p-3">
-              <Typography>Цвета:</Typography>
-              {colors.map((color, i) => (
-                <Circle key={i} htmlColor={color} />
-              ))}
-            </Box>
-          )}
-          {sizes && sizes.length > 0 && (
-            <Box className="bg-slate-200 p-3">
-              <Typography>Размеры:</Typography>
+          <Box className="bg-slate-200 p-3">
+            <Typography>Цвета:</Typography>
+            {Array.isArray(sizes) && colors.length > 0 ? (
+              <>
+                {colors.map((color, i) => (
+                  <Circle key={i} htmlColor={color} />
+                ))}
+              </>
+            ) : (
+              <Circle htmlColor={colors} />
+            )}
+          </Box>
+          <Box className="bg-slate-200 p-3">
+            <Typography>Размеры:</Typography>
+            {Array.isArray(sizes) && sizes.length > 0 ? (
               <div className="flex gap-2">
                 {sizes.map((size, i) => (
                   <div
@@ -71,8 +75,12 @@ export const ItemCard = ({
                   </div>
                 ))}
               </div>
-            </Box>
-          )}
+            ) : (
+              <div className="size-10 bg-white rounded-full flex justify-center items-center">
+                {sizes}
+              </div>
+            )}
+          </Box>
           <div className="flex justify-end">
             <Typography className="truncate">{cost} Р</Typography>
           </div>

@@ -194,7 +194,6 @@ export const GoodsAdmin = () => {
               {
                 return (
                   <div key={i}>
-                    {" "}
                     <Box
                       className="hover:shadow hover:cursor-pointer"
                       onClick={() => handleEditCloth(item)}

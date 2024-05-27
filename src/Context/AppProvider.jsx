@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Button } from "@mui/material";
 
 const AppContext = createContext();
 
@@ -53,7 +54,11 @@ export const LogOut = () => {
     setUser(null);
   };
 
-  return <button onClick={handleLogOut}>Выйти</button>;
+  return (
+    <div>
+      <Button onClick={handleLogOut}>Выйти</Button>
+    </div>
+  );
 };
 
 export default AppProvider;
