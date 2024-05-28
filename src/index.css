@@ -13,3 +13,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+
+.custom-sketch-picker .sketch-picker>div:nth-child(3)>div {
+  display: none;
+}
+

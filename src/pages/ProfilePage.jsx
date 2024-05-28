@@ -18,7 +18,6 @@ export function ProfilePage() {
             <Box className="flex flex-col justify-between">
               <Typography>{user?.firstName}</Typography>
               <Typography>{user?.email}</Typography>
-              <Button className="w-28">Выйти</Button>
             </Box>
           </Box>
           <Box className="flex flex-col gap-5">

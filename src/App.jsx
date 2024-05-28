@@ -15,6 +15,7 @@ import { OrdersPage } from "./pages/profile/OrdersPage";
 import FavoritePage from "./pages/profile/FavoritePage";
 import AddressPage from "./pages/profile/AddressPage";
 import EditPage from "./pages/profile/EditPage";
+import CreateTshirt from "./pages/createTshirt";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="edit" element={<EditPage />} />
           </Route>
           <Route path="tshirts" element={<TshirtsPage />} />
+          <Route path="tshirts/create" element={<CreateTshirt />} />
           <Route path="tshirts/:id" element={<SingleItemPage />} />
           <Route path="designer-clothes" element={<DesignerClothing />} />
           <Route path="designer-clothes/:id" element={<SingleItemPage />} />
@@ -39,7 +41,6 @@ function App() {
           <Route index element={<HomeAdmin />} />
           <Route path="orders" element={<OrdersAdmin />} />
           <Route path="goods" element={<GoodsAdmin />} />
-          <Route path="promo" element={<PromoAdmin />} />
         </Route>
       </Routes>
     </div>

@@ -13,9 +13,6 @@ export const MenuAdmin = () => {
       <Link to="/admin/goods" className="w-full">
         <Button fullWidth>Товары</Button>
       </Link>
-      <Link to="/admin/promo" className="w-full">
-        <Button fullWidth>Промокоды</Button>
-      </Link>
       <Link to="/" className="w-full">
         <Button fullWidth>Выйти</Button>
       </Link>

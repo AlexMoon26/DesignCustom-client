@@ -71,7 +71,7 @@ export const ModalRegister = ({ open, handleClose }) => {
               "userInfo",
               JSON.stringify(response.data.user)
             );
-            setUser(JSON.stringify(response.data.user));
+            setUser(response.data.user);
             alert("Успешная авторизация!");
             handleClose();
           })

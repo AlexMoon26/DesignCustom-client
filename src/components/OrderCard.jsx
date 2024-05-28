@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
-import { Check, Close, MoreHoriz } from "@mui/icons-material";
+import { MoreHoriz } from "@mui/icons-material";
 import { Box, IconButton, Menu, MenuItem, Typography } from "@mui/material";
 import dayjs from "dayjs";
 import { useContext, useState } from "react";
 import { ModalContext } from "./modalContext";
 import MoreInfoForm from "./forms/orders/moreInfoForm";
+import ChangeStatusForm from "./forms/orders/changeStatusForm";
+import { getOrderStatusText } from "../config/statusCheck";
 
-export const OrderCard = ({ order }) => {
+export const OrderCard = ({ order, handleFetchAgain }) => {
   const [options, setOptions] = useState(null);
   const { openModal, closeModal } = useContext(ModalContext);
 
@@ -28,19 +30,24 @@ export const OrderCard = ({ order }) => {
       title: `Заказ № ${order._id}`,
     });
   };
+
+  const handleChangeStatus = (order) => {
+    openModal({
+      component: ChangeStatusForm,
+      props: {
+        closeModal,
+        order,
+        handleFetchAgain,
+      },
+      title: `Изменение статуса заказа № ${order._id}`,
+    });
+  };
   return (
     <>
       <div
-        className={`flex w-full text-xs md:text-sm xxl:text-lg border-l-[50px] rounded-l shadow relative border-l-gray-400 p-5 rounded bg-white`}
+        className={`flex w-full text-xs md:text-sm xxl:text-lg border-l-[10px] rounded-l shadow relative border-l-gray-400 p-5 rounded bg-white`}
         role="list"
       >
-        <Box className="absolute -ml-10" top="40%" left={0}>
-          {order.status === "fulfilled" ? (
-            <Check color="success" />
-          ) : (
-            <Close color="error" />
-          )}
-        </Box>
         <ul className="w-full space-y-5 items-center justify-center">
           <li className="flex space-x-3 items-center">
             <Typography className=" font-normal truncate dark:text-gray-400">
@@ -55,6 +62,11 @@ export const OrderCard = ({ order }) => {
           <li className="flex space-x-3 items-center">
             <Typography className=" font-normal truncate dark:text-gray-400">
               {order.user.phone}
+            </Typography>
+          </li>
+          <li className="flex space-x-3 items-center">
+            <Typography className=" font-normal truncate dark:text-gray-400">
+              {getOrderStatusText(order.status)}
             </Typography>
           </li>
         </ul>
@@ -114,6 +126,9 @@ export const OrderCard = ({ order }) => {
               >
                 <MenuItem onClick={() => handleOpenMoreInfo(order)}>
                   Подробнее
+                </MenuItem>
+                <MenuItem onClick={() => handleChangeStatus(order)}>
+                  Изменить статус
                 </MenuItem>
               </Menu>
             </Box>

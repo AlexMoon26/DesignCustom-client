@@ -36,10 +36,11 @@ export const SingleItemPage = () => {
     initialValues: {
       _id: id,
       colors: "",
-      sizes: "M",
+      sizes: "",
     },
     validationSchema: Yup.object({
-      colors: Yup.string().required("Выберите цвет!"),
+      colors: Yup.string().required("Выберите цвет"),
+      sizes: Yup.string().required("Выберите размер"),
     }),
     onSubmit: async (values) => {
       try {
@@ -95,7 +96,7 @@ export const SingleItemPage = () => {
                       </Button>
                       <Button size="small">Размерная сетка</Button>
                     </Box>
-                    {isSizes && <Sizes formik={formik} />}
+                    {isSizes && <Sizes sizes={item.sizes} formik={formik} />}
                     <Accordion>
                       <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
@@ -115,11 +116,11 @@ export const SingleItemPage = () => {
                     <Typography textAlign="center">
                       Цена: {item.cost}
                     </Typography>
-                    {formik.errors.colors && (
-                      <Typography textAlign="center" color="red">
-                        {formik.errors.colors}
+                    {Object.values(formik.errors).map((error, index) => (
+                      <Typography textAlign="center" key={index} color="error">
+                        {error}
                       </Typography>
-                    )}
+                    ))}
                     <Button type="submit">В корзину</Button>
                   </Box>
                 </form>

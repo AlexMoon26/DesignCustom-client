@@ -1,11 +1,10 @@
 import { Box, Checkbox, Typography } from "@mui/material";
 import React from "react";
-import { colors as colorsSystem } from "../../data/data";
 import { Circle, CircleOutlined } from "@mui/icons-material";
 
 export default function Colors({ colors, formik }) {
   return (
-    <Box className="bg-gray-100 p-5 w-full">
+    <Box className="bg-slate-200 p-5 w-full">
       <Typography>Выберите цвет:</Typography>
       {colors.map((color, i) => (
         <Checkbox

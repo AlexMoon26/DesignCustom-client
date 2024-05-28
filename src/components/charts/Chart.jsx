@@ -7,7 +7,6 @@ import {
   Tooltip,
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
-import faker from "faker";
 import { Box } from "@mui/material";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip);
@@ -19,8 +18,8 @@ const options = {
 
 function App({ backgroundColor, data }) {
   return (
-    <Box className="flex flex-col justify-end">
-      <Bar options={options} data={data} />
+    <Box className="flex items-center justify-center w-full h-[50vh]">
+      <Bar data={data} />
     </Box>
   );
 }

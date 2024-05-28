@@ -16,6 +16,7 @@ export const HomeAdmin = () => {
           </Button>
         </Box>
         <Grapth dataItems={dataItems && dataItems} />
+
         <div className="w-full p-4 bg-white border border-gray-200 rounded shadow sm:p-8 ">
           <div className="flex items-center justify-between">
             <h5 className="text-xl truncate font-bold leading-none text-gray-600">

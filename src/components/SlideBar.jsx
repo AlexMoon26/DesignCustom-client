@@ -56,7 +56,7 @@ export const SlideBar = () => {
               >
                 <Box>
                   <Box position="absolute" bottom={20} left={20}>
-                    <Link to="/designer-clothing">
+                    <Link to="/designer-clothes">
                       <Button size="large">Дизайнерская одежда</Button>
                     </Link>
                   </Box>
@@ -78,7 +78,9 @@ export const SlideBar = () => {
               >
                 <Box>
                   <Box position="absolute" bottom={20} left={20}>
-                    <Button size="large">Создать футболку</Button>
+                    <Link to="/tshirts/create">
+                      <Button size="large">Создать футболку</Button>
+                    </Link>
                   </Box>
                 </Box>
               </Box>
@@ -130,7 +132,7 @@ export const SlideBar = () => {
               >
                 <Box>
                   <Box position="absolute" bottom={20} left={20}>
-                    <Link to="/designer-clothing">
+                    <Link to="/designer-clothes">
                       <Button size="large">Дизайнерская одежда</Button>
                     </Link>
                   </Box>
@@ -152,7 +154,9 @@ export const SlideBar = () => {
               >
                 <Box>
                   <Box position="absolute" bottom={20} left={20}>
-                    <Button size="large">Создать футболку</Button>
+                    <Link to="/tshirts/create">
+                      <Button size="large">Создать футболку</Button>
+                    </Link>
                   </Box>
                 </Box>
               </Box>

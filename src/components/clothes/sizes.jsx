@@ -1,8 +1,7 @@
 import { Box, Checkbox, Typography } from "@mui/material";
 import React from "react";
-import { sizes } from "../../data/data";
 
-export default function Sizes({ formik, closeModal }) {
+export default function Sizes({ formik, sizes }) {
   return (
     <Box className="bg-slate-200 p-5">
       <Typography>Выберите размер:</Typography>

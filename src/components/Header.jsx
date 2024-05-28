@@ -14,7 +14,7 @@ import {
   FontDownload,
   ShoppingCart,
 } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import { useState } from "react";
 import { ModalRegister } from "../components/Modals/ModalRegister.jsx";
@@ -79,12 +79,15 @@ export const Header = () => {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={() => router("/profile")}>Профиль</MenuItem>
-      <MenuItem onClick={() => router("/admin")}>Админ панель</MenuItem>
+      {user?.role === "admin" && (
+        <MenuItem onClick={() => router("/admin")}>Админ панель</MenuItem>
+      )}
       <MenuItem
         onClick={() => {
           handleMenuClose();
           localStorage.removeItem("token");
           localStorage.removeItem("userInfo");
+          router("/");
         }}
       >
         Выйти
@@ -143,23 +146,26 @@ export const Header = () => {
         </IconButton>
         <p>Корзина</p>
       </MenuItem>
-      <MenuItem onClick={() => router("/admin")}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <FontDownload />
-        </IconButton>
-        <p>Админ панель</p>
-      </MenuItem>
+      {user?.role === "admin" && (
+        <MenuItem onClick={() => router("/admin")}>
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="menu"
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <FontDownload />
+          </IconButton>
+          <p>Админ панель</p>
+        </MenuItem>
+      )}
       <MenuItem
         onClick={() => {
           localStorage.removeItem("token");
           localStorage.removeItem("userInfo");
           handleMobileMenuClose();
+          router("/");
         }}
       >
         <IconButton
@@ -181,7 +187,7 @@ export const Header = () => {
       <AppBar position="fixed">
         <Toolbar>
           <Box sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }} />
-          <Typography variant="h6" noWrap component="div">
+          <Typography variant="h6" noWrap component={Link} to="/">
             Design Custom
           </Typography>
           <Box sx={{ flexGrow: 1 }} />

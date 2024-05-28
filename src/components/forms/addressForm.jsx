@@ -68,7 +68,7 @@ export default function AddressForm({ closeModal, address, handleFetchAgain }) {
           {error}
         </Typography>
       ))}
-      <Button type="submit">Создать</Button>
+      <Button type="submit">{address ? "Изменить" : "Создать"}</Button>
     </form>
   );
 }

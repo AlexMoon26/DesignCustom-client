@@ -70,7 +70,7 @@ export default function MoreInfoForm({ closeModal, order }) {
           <ItemCard
             key={i}
             name={item.cloth.name}
-            colors={item.colors}
+            colors={item.color}
             sizes={item.size}
             pictures={item.cloth.pictures}
             cost={item.cloth.cost}

@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Input, Typography } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import AddressForm from "../../components/forms/addressForm";
 import { ModalContext } from "../../components/modalContext";
@@ -25,7 +25,7 @@ export default function AddressPage() {
     openModal({
       component: AddressForm,
       props: { closeModal, handleFetchAgain, address },
-      title: "Создание платежного адреса",
+      title: "Изменение платежного адреса",
     });
   };
 
@@ -40,8 +40,11 @@ export default function AddressPage() {
       <Typography fontWeight="bold">Платежный адрес</Typography>
       {address ? (
         <div>
-          <Box className="flex flex-col w-48 items-left gap-3">
-            <Box className="bg-gray-300 size-48 rounded" />
+          <Box className="flex flex-col items-left gap-3">
+            <Input value={address.region} disabled />
+            <Input value={address.city} disabled />
+            <Input value={address.index} disabled />
+            <Input value={address.address} disabled />
             <Button onClick={handleEditAddress}>Изменить</Button>
           </Box>
         </div>

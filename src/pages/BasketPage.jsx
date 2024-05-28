@@ -3,16 +3,19 @@ import { BreadCrumbs } from "../components/Breadcrumbs";
 import ErrorOutlineOutlinedIcon from "@mui/icons-material/ErrorOutlineOutlined";
 import { Link } from "react-router-dom";
 import { AppState } from "../Context/AppProvider";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "../axios";
 import { useScreenWidth } from "../hooks/useScreenWidth";
 import { Circle, Delete } from "@mui/icons-material";
 import { toast } from "sonner";
+import { ModalContext } from "../components/modalContext";
+import { CreateOrderForm } from "../components/forms/orders/createOrderForm";
 
 export const BasketPage = () => {
   const { user, setUser } = AppState();
   const [items, setItems] = useState(null);
   const [totalCost, setTotalCost] = useState(0);
+  const { openModal, closeModal } = useContext(ModalContext);
   const { isDesktop } = useScreenWidth();
 
   const handleFetchAgain = async () => {
@@ -31,13 +34,12 @@ export const BasketPage = () => {
     }
   };
 
-  const handleCreateOrder = async () => {
-    const response = await axios.post("/orders/create");
-    if (response.status === 201) {
-      handleFetchAgain();
-      setItems(null);
-      toast.success("Заказ успешно сформирован");
-    }
+  const handleCreateOrder = () => {
+    openModal({
+      component: CreateOrderForm,
+      props: { closeModal, items, setItems, totalCost, handleFetchAgain, user },
+      title: "Формирование заказа",
+    });
   };
 
   useEffect(() => {

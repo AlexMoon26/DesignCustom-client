@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 const breadcrumbNameMap = {
   "/": "Главная",
   "/tshirts": "Футболки",
+  "/tshirts/create": "Создание футболки",
   "/designer-clothes": "Дизайнерская одежда",
   "/basket": "Корзина",
   "/profile": "Профиль",

@@ -57,11 +57,13 @@ export const OrdersAdmin = () => {
         }
       });
 
+  const handleFetchAgain = async () => {
+    const response = await axios.get("/orders");
+    setOrders(response.data);
+  };
+
   useEffect(() => {
-    (async () => {
-      const response = await axios.get("/orders");
-      setOrders(response.data);
-    })();
+    handleFetchAgain();
   }, []);
 
   return (
@@ -103,7 +105,11 @@ export const OrdersAdmin = () => {
         <Box className="grid grid-cols-1 gap-4">
           {orders && filteredData?.length > 0
             ? filteredData.map((order, i) => (
-                <OrderCard key={i} order={order} />
+                <OrderCard
+                  key={i}
+                  order={order}
+                  handleFetchAgain={handleFetchAgain}
+                />
               ))
             : "Таких заказов не найдено"}
         </Box>
