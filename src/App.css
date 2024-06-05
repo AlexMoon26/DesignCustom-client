@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
   --foreground-rgb: 32, 35, 40;
   --background-start-rgb: 214, 219, 220;

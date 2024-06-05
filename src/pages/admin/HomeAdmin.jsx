@@ -17,16 +17,30 @@ export const HomeAdmin = () => {
         </Box>
         <Grapth dataItems={dataItems && dataItems} />
 
-        <div className="w-full p-4 bg-white border border-gray-200 rounded shadow sm:p-8 ">
-          <div className="flex items-center justify-between">
-            <h5 className="text-xl truncate font-bold leading-none text-gray-600">
-              Статистика
+        <div className="flex justify-between gap-5 w-full">
+          <div className=" p-4 w-1/3 min-w-1/3 bg-white border border-gray-200 rounded shadow">
+            <h5 className="truncate font-bold leading-none text-gray-500">
+              Себестоимость
             </h5>
+            <div className="w-full py-5 h-full flex flex-col justify-center items-center">
+              <Typography>10 000</Typography>
+            </div>
           </div>
-          <div className="w-full h-full flex flex-col justify-center items-center">
-            <Typography>Валовая прибыль: 10 000</Typography>
-            <Typography>Выручка: 10 000</Typography>
-            <Typography>Себестоимость: 10 000</Typography>
+          <div className=" p-4 w-1/3 min-w-1/3 bg-white border border-gray-200 rounded shadow">
+            <h5 className="truncate font-bold leading-none text-gray-500">
+              Выручка
+            </h5>
+            <div className="w-full py-5 h-full flex flex-col justify-center items-center">
+              <Typography>10 000</Typography>
+            </div>
+          </div>
+          <div className=" p-4 w-1/3  min-w-1/3 bg-white border border-gray-200 rounded shadow">
+            <h5 className="truncate font-bold leading-none text-gray-500">
+              Валовая прибыль
+            </h5>
+            <div className="w-full py-5 h-full flex flex-col justify-center items-center">
+              <Typography>10 000</Typography>
+            </div>
           </div>
         </div>
 
